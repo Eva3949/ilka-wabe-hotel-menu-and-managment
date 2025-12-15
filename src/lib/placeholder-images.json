@@ -1,3 +1,64 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "1",
+      "description": "A plate of bruschetta with fresh tomatoes and basil.",
+      "imageUrl": "https://images.unsplash.com/photo-1689693137746-264b31a2eba7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxicnVzY2hldHRhJTIwdG9tYXRvfGVufDB8fHx8MTc2NTgwMzA4NHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "bruschetta tomato"
+    },
+    {
+      "id": "2",
+      "description": "A caprese salad with mozzarella, tomatoes, and basil leaves.",
+      "imageUrl": "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjYXByZXNlJTIwc2FsYWR8ZW58MHx8fHwxNzY1ODAzMDgzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "caprese salad"
+    },
+    {
+      "id": "3",
+      "description": "A bowl of spaghetti carbonara with pancetta.",
+      "imageUrl": "https://images.unsplash.com/photo-1633337474564-1d9478ca4e2e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzcGFnaGV0dGklMjBjYXJib25hcmF8ZW58MHx8fHwxNzY1Nzg5ODg5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "spaghetti carbonara"
+    },
+    {
+      "id": "4",
+      "description": "A freshly baked margherita pizza.",
+      "imageUrl": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxtYXJnaGVyaXRhJTIwcGl6emF8ZW58MHx8fHwxNzY1Nzk2OTE2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "margherita pizza"
+    },
+    {
+      "id": "5",
+      "description": "A slice of tiramisu on a plate.",
+      "imageUrl": "https://images.unsplash.com/photo-1662230676539-0e1fd1bed515?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHx0aXJhbWlzdSUyMGRlc3NlcnR8ZW58MHx8fHwxNzY1ODI0MjgzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "tiramisu dessert"
+    },
+    {
+      "id": "6",
+      "description": "Panna cotta dessert with berry sauce.",
+      "imageUrl": "https://images.unsplash.com/photo-1518710101263-54e0350377bb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxwYW5uYSUyMGNvdHRhfGVufDB8fHx8MTc2NTgyNDI4Mnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "panna cotta"
+    },
+    {
+      "id": "7",
+      "description": "A cup of strong espresso.",
+      "imageUrl": "https://images.unsplash.com/photo-1650967229895-dc2f27f89813?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxlc3ByZXNzbyUyMGNvZmZlZXxlbnwwfHx8fDE3NjU3NzE4MzV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "espresso coffee"
+    },
+    {
+      "id": "8",
+      "description": "A latte with foam art.",
+      "imageUrl": "https://images.unsplash.com/photo-1596018589878-217d8603c4c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxsYXR0ZSUyMGFydHxlbnwwfHx8fDE3NjU3NjcyNDh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "latte art"
+    },
+    {
+      "id": "9",
+      "description": "Grilled Salmon dish",
+      "imageUrl": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxncmlsbGVkJTIwc2FsbW9ufGVufDB8fHx8MTc2NTc3MTg0Mnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "grilled salmon"
+    },
+    {
+      "id": "10",
+      "description": "Chocolate lava cake",
+      "imageUrl": "https://images.unsplash.com/photo-1626263468007-a9e0cf83f1ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjaG9jb2xhdGUlMjBjYWtlfGVufDB8fHx8MTc2NTc2NjQ1Mnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "chocolate cake"
+    }
+  ]
 }
