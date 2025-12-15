@@ -13,9 +13,9 @@ export default async function Home() {
       <Hero />
       <main className="flex-1 container mx-auto px-4 py-8">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-headline font-bold tracking-tight text-foreground mt-2">
+          <h2 className="text-4xl md:text-5xl font-headline font-bold tracking-tight text-foreground mt-2">
             Our Menu
-          </h1>
+          </h2>
         </div>
         <MenuDisplay categories={categories} items={menuItems} />
       </main>
