@@ -11,7 +11,10 @@ export default async function Home() {
       <Header />
       <main className="flex-1 container mx-auto px-4 py-8">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-headline font-bold tracking-tight text-foreground">
+          <h2 className="text-3xl font-headline text-primary tracking-widest">
+            MenuCentral
+          </h2>
+          <h1 className="text-4xl md:text-5xl font-headline font-bold tracking-tight text-foreground mt-2">
             Our Menu
           </h1>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
