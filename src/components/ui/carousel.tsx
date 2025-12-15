@@ -14,6 +14,15 @@ type UseCarouselParameters = Parameters<typeof useEmblaCarousel>
 type CarouselOptions = UseCarouselParameters[0]
 type CarouselPlugin = UseCarouselParameters[1]
 
+// New type to allow specifying the Embla API type for custom effects like 'fade'
+type EmblaApiType = "slide" | "fade";
+
+// Add emblaApiType to CarouselContent props
+type CarouselContentProps = React.HTMLAttributes<HTMLDivElement> & {
+  emblaApiType?: EmblaApiType;
+};
+
+
 type CarouselProps = {
   opts?: CarouselOptions
   plugins?: CarouselPlugin
@@ -150,19 +159,45 @@ const Carousel = React.forwardRef<
 )
 Carousel.displayName = "Carousel"
 
-const CarouselContent = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => {
-  const { carouselRef, orientation } = useCarousel()
+const CarouselContent = React.forwardRef<HTMLDivElement, CarouselContentProps>(
+  ({ className, emblaApiType = 'slide', ...props }, ref) => {
+  const { carouselRef, orientation, api } = useCarousel()
+
+  React.useEffect(() => {
+    if (api && emblaApiType === 'fade') {
+      const onSelect = () => {
+        const slides = api.slideNodes();
+        slides.forEach((slide, index) => {
+          if (index === api.selectedScrollSnap()) {
+            slide.classList.add('is-active');
+          } else {
+            slide.classList.remove('is-active');
+          }
+        });
+      };
+      
+      api.on('select', onSelect);
+      api.on('reInit', onSelect);
+      // Initial setup
+      onSelect();
+
+      return () => {
+        api.off('select', onSelect);
+      };
+    }
+  }, [api, emblaApiType]);
+  
+    const baseClasses = emblaApiType === 'fade'
+    ? 'flex'
+    : `flex ${orientation === "horizontal" ? "-ml-4" : "-mt-4 flex-col"}`;
+
 
   return (
     <div ref={carouselRef} className="overflow-hidden">
       <div
         ref={ref}
         className={cn(
-          "flex",
-          orientation === "horizontal" ? "-ml-4" : "-mt-4 flex-col",
+          baseClasses,
           className
         )}
         {...props}
@@ -174,9 +209,13 @@ CarouselContent.displayName = "CarouselContent"
 
 const CarouselItem = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => {
+  React.HTMLAttributes<HTMLDivElement> & { emblaApiType?: EmblaApiType }
+>(({ className, emblaApiType = 'slide', ...props }, ref) => {
   const { orientation } = useCarousel()
+
+  const baseClasses = emblaApiType === 'fade'
+  ? 'min-w-0 shrink-0 grow-0 basis-full relative'
+  : `min-w-0 shrink-0 grow-0 basis-full ${orientation === "horizontal" ? "pl-4" : "pt-4"}`;
 
   return (
     <div
@@ -184,8 +223,7 @@ const CarouselItem = React.forwardRef<
       role="group"
       aria-roledescription="slide"
       className={cn(
-        "min-w-0 shrink-0 grow-0 basis-full",
-        orientation === "horizontal" ? "pl-4" : "pt-4",
+        baseClasses,
         className
       )}
       {...props}
