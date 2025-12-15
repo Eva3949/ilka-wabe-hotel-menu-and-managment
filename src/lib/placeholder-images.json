@@ -65,6 +65,78 @@
       "description": "A platter of fresh sushi and sashimi.",
       "imageUrl": "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=1200&q=80",
       "imageHint": "sushi platter"
+    },
+    {
+      "id": "12",
+      "description": "Crispy fried calamari rings served with a zesty marinara sauce.",
+      "imageUrl": "https://images.unsplash.com/photo-1625535391488-286b5a8409a2?w=1200&q=80",
+      "imageHint": "fried calamari"
+    },
+    {
+      "id": "13",
+      "description": "Mushroom caps filled with seasoned breadcrumbs, garlic, and herbs.",
+      "imageUrl": "https://images.unsplash.com/photo-1631292784018-c2b23a96ad1a?w=1200&q=80",
+      "imageHint": "stuffed mushrooms"
+    },
+    {
+      "id": "14",
+      "description": "Toasted baguette with garlic butter and melted mozzarella cheese.",
+      "imageUrl": "https://images.unsplash.com/photo-1589578236166-353d9c288924?w=1200&q=80",
+      "imageHint": "garlic bread"
+    },
+    {
+      "id": "15",
+      "description": "Layers of pasta, rich meat sauce, and creamy béchamel.",
+      "imageUrl": "https://images.unsplash.com/photo-1598866594240-a7264a132441?w=1200&q=80",
+      "imageHint": "lasagna bolognese"
+    },
+    {
+      "id": "16",
+      "description": "Breaded chicken breast topped with marinara and mozzarella, served with pasta.",
+      "imageUrl": "https://images.unsplash.com/photo-1632778149955-633235a5d134?w=1200&q=80",
+      "imageHint": "chicken parmesan"
+    },
+    {
+      "id": "17",
+      "description": "Creamy parmesan sauce over tender fettuccine noodles.",
+      "imageUrl": "https://images.unsplash.com/photo-1597131628175-c6f45e8e3b57?w=1200&q=80",
+      "imageHint": "fettuccine alfredo"
+    },
+    {
+      "id": "18",
+      "description": "Warm chocolate cake with a gooey molten center, served with vanilla ice cream.",
+      "imageUrl": "https://images.unsplash.com/photo-1586985288934-84c172a8c353?w=1200&q=80",
+      "imageHint": "lava cake"
+    },
+    {
+      "id": "19",
+      "description": "Crisp pastry shells filled with sweet, creamy ricotta cheese.",
+      "imageUrl": "https://images.unsplash.com/photo-1570197821424-df12f12c1b82?w=1200&q=80",
+      "imageHint": "cannoli pastry"
+    },
+    {
+      "id": "20",
+      "description": "A refreshing and tangy lemon sorbet.",
+      "imageUrl": "https://images.unsplash.com/photo-1533152288339-e33b6f0e473e?w=1200&q=80",
+      "imageHint": "lemon sorbet"
+    },
+    {
+      "id": "21",
+      "description": "Freshly squeezed orange juice.",
+      "imageUrl": "https://images.unsplash.com/photo-1600271886742-f049cd452bba?w=1200&q=80",
+      "imageHint": "orange juice"
+    },
+    {
+      "id": "22",
+      "description": "Chilled black tea with a hint of lemon.",
+      "imageUrl": "https://images.unsplash.com/photo-1556745753-b2904692b3cd?w=1200&q=80",
+      "imageHint": "iced tea"
+    },
+    {
+      "id": "23",
+      "description": "A sparkling cocktail made with Prosecco and peach purée.",
+      "imageUrl": "https://images.unsplash.com/photo-1599021448834-c2a493b863da?w=1200&q=80",
+      "imageHint": "bellini cocktail"
     }
   ]
 }
