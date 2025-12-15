@@ -12,7 +12,7 @@ export default async function Home() {
       <main className="flex-1 container mx-auto px-4 py-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-headline text-primary tracking-widest">
-            MenuCentral
+            Haile Restaurant and Spa
           </h2>
           <h1 className="text-4xl md:text-5xl font-headline font-bold tracking-tight text-foreground mt-2">
             Our Menu
@@ -24,7 +24,7 @@ export default async function Home() {
         <MenuDisplay categories={categories} items={menuItems} />
       </main>
       <footer className="py-6 text-center text-muted-foreground">
-        <p>&copy; {new Date().getFullYear()} MenuCentral. All Rights Reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Haile Restaurant and Spa. All Rights Reserved.</p>
       </footer>
     </div>
   );
