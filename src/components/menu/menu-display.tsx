@@ -36,9 +36,9 @@ export function MenuDisplay({ categories, items }: MenuDisplayProps) {
           (item) => item.categoryId === category.id
         );
         return (
-          <TabsContent key={category.id} value={category.id}>
+          <TabsContent key={category.id} value={category.id} className="data-[state=active]:animate-slide-up">
             {itemsInCategory.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8 transition-all duration-500 animate-in fade-in-50">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
                 {itemsInCategory.map((item) => (
                   <MenuItemCard key={item.id} item={item} />
                 ))}
