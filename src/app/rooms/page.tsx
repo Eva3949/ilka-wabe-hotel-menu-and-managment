@@ -1,6 +1,7 @@
 import { Header } from '@/components/layout/header';
 import { RoomCard } from '@/components/rooms/room-card';
 import { roomsData } from '@/lib/rooms-data';
+import { ContactSection } from '@/components/layout/contact-section';
 
 export default function RoomsPage() {
   return (
@@ -21,7 +22,8 @@ export default function RoomsPage() {
           ))}
         </div>
       </main>
-      <footer className="py-6 text-center text-muted-foreground">
+      <ContactSection />
+      <footer className="py-6 text-center text-muted-foreground bg-secondary/50">
         <p>&copy; {new Date().getFullYear()} ilka Wabe Hotel. All Rights Reserved.</p>
       </footer>
     </div>

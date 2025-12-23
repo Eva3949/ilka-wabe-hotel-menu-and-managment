@@ -2,6 +2,7 @@ import { Header } from '@/components/layout/header';
 import { Hero } from '@/components/layout/hero';
 import { MenuDisplay } from '@/components/menu/menu-display';
 import { getCategories, getMenuItems } from '@/lib/data';
+import { ContactSection } from '@/components/layout/contact-section';
 
 export default async function Home() {
   const categories = await getCategories();
@@ -19,7 +20,8 @@ export default async function Home() {
         </div>
         <MenuDisplay categories={categories} items={menuItems} />
       </main>
-      <footer className="py-6 text-center text-muted-foreground">
+      <ContactSection />
+      <footer className="py-6 text-center text-muted-foreground bg-secondary/50">
         <p>&copy; {new Date().getFullYear()} ilka Wabe Hotel. All Rights Reserved.</p>
       </footer>
     </div>
