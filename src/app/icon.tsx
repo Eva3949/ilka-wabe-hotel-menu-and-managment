@@ -1,4 +1,4 @@
-import { UtensilsCrossed } from 'lucide-react';
+import { Bed } from 'lucide-react';
 import { ImageResponse } from 'next/og';
 
 export const runtime = 'edge';
@@ -24,7 +24,7 @@ export default function Icon() {
           borderRadius: '8px',
         }}
       >
-        <UtensilsCrossed />
+        <Bed />
       </div>
     ),
     {
