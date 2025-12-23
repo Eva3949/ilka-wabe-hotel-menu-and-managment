@@ -1,5 +1,6 @@
-import type { MenuItem, Category } from './types';
+import type { MenuItem, Category, Customer, Booking, Room } from './types';
 import { placeholderImages } from './placeholder-images.json';
+import { roomsData } from './rooms-data';
 
 // In-memory store
 let categories: Category[] = [
@@ -33,6 +34,18 @@ let menuItems: MenuItem[] = [
   { id: '18', name: 'Fresh Orange Juice', description: 'Freshly squeezed orange juice.', price: 5.50, itemType: 'Vegan', categoryId: '4', imageUrl: placeholderImages[20].imageUrl, imageHint: placeholderImages[20].imageHint },
   { id: '19', name: 'Iced Tea', description: 'Chilled black tea with a hint of lemon.', price: 3.50, itemType: 'Vegan', categoryId: '4', imageUrl: placeholderImages[21].imageUrl, imageHint: placeholderImages[21].imageHint },
   { id: '20', name: 'Bellini', description: 'A sparkling cocktail made with Prosecco and peach purée.', price: 9.00, itemType: 'Alcoholic', categoryId: '4', imageUrl: placeholderImages[22].imageUrl, imageHint: placeholderImages[22].imageHint },
+];
+
+let customers: Customer[] = [
+    { id: '1', name: 'Alice Johnson', email: 'alice.j@email.com', phone: '123-456-7890' },
+    { id: '2', name: 'Bob Williams', email: 'bob.w@email.com', phone: '234-567-8901' },
+    { id: '3', name: 'Charlie Brown', email: 'charlie.b@email.com', phone: '345-678-9012' },
+];
+
+let bookings: Booking[] = [
+    { id: '1', customerId: '1', roomId: '2', checkIn: '2024-08-10', checkOut: '2024-08-15', status: 'Confirmed' },
+    { id: '2', customerId: '2', roomId: '1', checkIn: '2024-08-12', checkOut: '2024-08-14', status: 'Checked-In' },
+    { id: '3', customerId: '3', roomId: '4', checkIn: '2024-08-01', checkOut: '2024-08-05', status: 'Checked-Out' },
 ];
 
 
@@ -118,4 +131,70 @@ export async function deleteMenuItem(id: string): Promise<boolean> {
   const initialLength = menuItems.length;
   menuItems = menuItems.filter(item => item.id !== id);
   return menuItems.length < initialLength;
+}
+
+// --- Customer Functions ---
+
+export async function getCustomers(): Promise<Customer[]> {
+  await delay(100);
+  return [...customers];
+}
+
+export async function addCustomer(customerData: Omit<Customer, 'id'>): Promise<Customer> {
+  await delay(200);
+  const newCustomer: Customer = {
+    id: (customers.length + 1 + Math.random()).toString(),
+    ...customerData,
+  };
+  customers.push(newCustomer);
+  return newCustomer;
+}
+
+export async function updateCustomer(id: string, customerData: Partial<Omit<Customer, 'id'>>): Promise<Customer | null> {
+  await delay(200);
+  const index = customers.findIndex(c => c.id === id);
+  if (index === -1) return null;
+  customers[index] = { ...customers[index], ...customerData };
+  return customers[index];
+}
+
+export async function deleteCustomer(id: string): Promise<boolean> {
+  await delay(200);
+  const initialLength = customers.length;
+  customers = customers.filter(c => c.id !== id);
+  // Also delete bookings associated with this customer
+  bookings = bookings.filter(b => b.customerId !== id);
+  return customers.length < initialLength;
+}
+
+// --- Booking Functions ---
+
+export async function getBookings(): Promise<Booking[]> {
+    await delay(100);
+    return [...bookings];
+}
+
+export async function addBooking(bookingData: Omit<Booking, 'id'>): Promise<Booking> {
+    await delay(200);
+    const newBooking: Booking = {
+        id: (bookings.length + 1 + Math.random()).toString(),
+        ...bookingData,
+    };
+    bookings.push(newBooking);
+    return newBooking;
+}
+
+export async function updateBooking(id: string, bookingData: Partial<Omit<Booking, 'id'>>): Promise<Booking | null> {
+    await delay(200);
+    const index = bookings.findIndex(b => b.id === id);
+    if (index === -1) return null;
+    bookings[index] = { ...bookings[index], ...bookingData };
+    return bookings[index];
+}
+
+export async function deleteBooking(id: string): Promise<boolean> {
+    await delay(200);
+    const initialLength = bookings.length;
+    bookings = bookings.filter(b => b.id !== id);
+    return bookings.length < initialLength;
 }

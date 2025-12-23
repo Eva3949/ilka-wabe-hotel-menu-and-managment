@@ -10,9 +10,15 @@ import {
   deleteMenuItem,
   getMenuItems,
   getCategories,
+  addCustomer,
+  updateCustomer,
+  deleteCustomer,
+  addBooking,
+  updateBooking,
+  deleteBooking,
 } from "@/lib/data";
 import { addRoom, updateRoom, deleteRoom } from "@/lib/rooms-data";
-import type { Category, MenuItem, Room } from "@/lib/types";
+import type { Category, MenuItem, Room, Customer, Booking } from "@/lib/types";
 import { suggestMenuItem, SuggestMenuItemInput } from "@/ai/flows/suggest-menu-item";
 import { z } from "zod";
 
@@ -35,6 +41,20 @@ const roomSchema = z.object({
   capacity: z.coerce.number().int().positive("Capacity must be a positive number."),
   bedType: z.string().min(3, "Bed type is required."),
   imageUrl: z.string().url("Please enter a valid URL.").optional().or(z.literal('')),
+});
+
+const customerSchema = z.object({
+  name: z.string().min(2, "Customer name must be at least 2 characters."),
+  email: z.string().email("Please enter a valid email address."),
+  phone: z.string().min(10, "Phone number must be at least 10 digits."),
+});
+
+const bookingSchema = z.object({
+  customerId: z.string().min(1, "Customer is required."),
+  roomId: z.string().min(1, "Room is required."),
+  checkIn: z.string().min(1, "Check-in date is required."),
+  checkOut: z.string().min(1, "Check-out date is required."),
+  status: z.enum(['Confirmed', 'Checked-In', 'Checked-Out', 'Cancelled']),
 });
 
 
@@ -184,5 +204,81 @@ export async function updateRoomAction(id: string, formData: FormData) {
 export async function deleteRoomAction(id: string) {
   await deleteRoom(id);
   revalidatePath("/rooms");
+  revalidatePath("/admin");
+}
+
+// Customer Actions
+export async function addCustomerAction(formData: FormData) {
+  const validatedFields = customerSchema.safeParse({
+    name: formData.get("name"),
+    email: formData.get("email"),
+    phone: formData.get("phone"),
+  });
+
+  if (!validatedFields.success) {
+    return { error: validatedFields.error.flatten().fieldErrors };
+  }
+  await addCustomer(validatedFields.data);
+  revalidatePath("/admin");
+}
+
+export async function updateCustomerAction(id: string, formData: FormData) {
+  const validatedFields = customerSchema.safeParse({
+    name: formData.get("name"),
+    email: formData.get("email"),
+    phone: formData.get("phone"),
+  });
+
+  if (!validatedFields.success) {
+    return { error: validatedFields.error.flatten().fieldErrors };
+  }
+  await updateCustomer(id, validatedFields.data);
+  revalidatePath("/admin");
+}
+
+export async function deleteCustomerAction(id: string) {
+  await deleteCustomer(id);
+  revalidatePath("/admin");
+}
+
+// Booking Actions
+export async function addBookingAction(formData: FormData) {
+  const rawData = {
+    customerId: formData.get("customerId"),
+    roomId: formData.get("roomId"),
+    checkIn: formData.get("checkIn"),
+    checkOut: formData.get("checkOut"),
+    status: formData.get("status"),
+  };
+
+  const validatedFields = bookingSchema.safeParse(rawData);
+
+  if (!validatedFields.success) {
+    return { error: validatedFields.error.flatten().fieldErrors };
+  }
+  await addBooking(validatedFields.data);
+  revalidatePath("/admin");
+}
+
+export async function updateBookingAction(id: string, formData: FormData) {
+    const rawData = {
+        customerId: formData.get("customerId"),
+        roomId: formData.get("roomId"),
+        checkIn: formData.get("checkIn"),
+        checkOut: formData.get("checkOut"),
+        status: formData.get("status"),
+    };
+    
+  const validatedFields = bookingSchema.safeParse(rawData);
+
+  if (!validatedFields.success) {
+    return { error: validatedFields.error.flatten().fieldErrors };
+  }
+  await updateBooking(id, validatedFields.data);
+  revalidatePath("/admin");
+}
+
+export async function deleteBookingAction(id: string) {
+  await deleteBooking(id);
   revalidatePath("/admin");
 }
