@@ -55,9 +55,6 @@ export function RoomCard({ room }: RoomCardProps) {
           </p>
           <p className="text-xs text-muted-foreground">per night</p>
         </div>
-        <Button asChild>
-          <Link href={`/bookings?roomId=${room.id}`}>Book Now</Link>
-        </Button>
       </CardFooter>
     </Card>
   );
