@@ -8,8 +8,6 @@ import {
   addMenuItem,
   updateMenuItem,
   deleteMenuItem,
-  getMenuItems,
-  getCategories,
   addCustomer,
   updateCustomer,
   deleteCustomer,
@@ -19,7 +17,6 @@ import {
 } from "@/lib/data";
 import { addRoom, updateRoom, deleteRoom } from "@/lib/rooms-data";
 import type { Category, MenuItem, Room, Customer, Booking } from "@/lib/types";
-import { suggestMenuItem, SuggestMenuItemInput } from "@/ai/flows/suggest-menu-item";
 import { z } from "zod";
 
 const categorySchema = z.object({
@@ -140,23 +137,6 @@ export async function deleteMenuItemAction(id: string) {
   await deleteMenuItem(id);
   revalidatePath("/");
   revalidatePath("/admin");
-}
-
-export async function suggestMenuItemAction(input: SuggestMenuItemInput) {
-  try {
-    const result = await suggestMenuItem(input);
-    return { success: true, data: result };
-  } catch (error) {
-    return { success: false, error: "Failed to get AI suggestion." };
-  }
-}
-
-export async function getFullMenuAsString() {
-  const items = await getMenuItems();
-  const categories = await getCategories();
-  const categoryMap = new Map(categories.map(c => [c.id, c.name]));
-
-  return items.map(item => `${item.name} (${categoryMap.get(item.categoryId) || 'Uncategorized'}): ${item.description}`).join('\n');
 }
 
 export async function addRoomAction(formData: FormData) {
