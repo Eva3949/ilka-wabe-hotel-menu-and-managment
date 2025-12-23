@@ -59,20 +59,20 @@ export async function getRoomById(id: string): Promise<Room | undefined> {
     return rooms.find(r => r.id === id);
 }
 
-export async function addRoom(roomData: Omit<Room, 'id' | 'imageUrl' | 'imageHint'>): Promise<Room> {
+export async function addRoom(roomData: Omit<Room, 'id' | 'imageHint'>): Promise<Room> {
   await delay(200);
   const randomImage = placeholderImages[Math.floor(Math.random() * placeholderImages.length)];
   const newRoom: Room = {
     id: (rooms.length + 1 + Math.random()).toString(),
     ...roomData,
-    imageUrl: randomImage.imageUrl,
+    imageUrl: roomData.imageUrl || randomImage.imageUrl,
     imageHint: 'hotel room', // generic hint
   };
   rooms.push(newRoom);
   return newRoom;
 }
 
-export async function updateRoom(id: string, roomData: Partial<Omit<Room, 'id' | 'imageUrl' | 'imageHint'>>): Promise<Room | null> {
+export async function updateRoom(id: string, roomData: Partial<Omit<Room, 'id' | 'imageHint'>>): Promise<Room | null> {
   await delay(200);
   const index = rooms.findIndex(r => r.id === id);
   if (index === -1) return null;

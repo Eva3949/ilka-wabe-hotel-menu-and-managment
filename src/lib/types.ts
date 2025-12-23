@@ -21,6 +21,6 @@ export interface Room {
     pricePerNight: number;
     capacity: number;
     bedType: string;
-    imageUrl: string;
+    imageUrl?: string;
     imageHint: string;
 }

@@ -34,7 +34,7 @@ export function RoomsTable({ rooms }: RoomsTableProps) {
             <TableRow key={room.id}>
               <TableCell>
                 <Image
-                  src={room.imageUrl}
+                  src={room.imageUrl || 'https://picsum.photos/seed/placeholder/600/400'}
                   alt={room.name}
                   width={50}
                   height={50}

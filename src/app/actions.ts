@@ -34,6 +34,7 @@ const roomSchema = z.object({
   pricePerNight: z.coerce.number().positive("Price must be a positive number."),
   capacity: z.coerce.number().int().positive("Capacity must be a positive number."),
   bedType: z.string().min(3, "Bed type is required."),
+  imageUrl: z.string().url("Please enter a valid URL.").optional().or(z.literal('')),
 });
 
 
@@ -145,6 +146,7 @@ export async function addRoomAction(formData: FormData) {
     pricePerNight: formData.get("pricePerNight"),
     capacity: formData.get("capacity"),
     bedType: formData.get("bedType"),
+    imageUrl: formData.get("imageUrl"),
   });
 
   if (!validatedFields.success) {
@@ -165,6 +167,7 @@ export async function updateRoomAction(id: string, formData: FormData) {
     pricePerNight: formData.get("pricePerNight"),
     capacity: formData.get("capacity"),
     bedType: formData.get("bedType"),
+    imageUrl: formData.get("imageUrl"),
   });
 
   if (!validatedFields.success) {

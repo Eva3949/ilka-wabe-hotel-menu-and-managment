@@ -39,6 +39,7 @@ const formSchema = z.object({
   pricePerNight: z.coerce.number().positive('Price must be a positive number.'),
   capacity: z.coerce.number().int().positive('Capacity must be a positive number.'),
   bedType: z.string().min(3, 'Bed type is required.'),
+  imageUrl: z.string().url("Please enter a valid URL.").optional().or(z.literal('')),
 });
 
 export function RoomFormDialog({
@@ -55,6 +56,7 @@ export function RoomFormDialog({
       pricePerNight: 0,
       capacity: 1,
       bedType: '',
+      imageUrl: '',
     },
   });
 
@@ -66,6 +68,7 @@ export function RoomFormDialog({
         pricePerNight: room.pricePerNight,
         capacity: room.capacity,
         bedType: room.bedType,
+        imageUrl: room.imageUrl || '',
       });
     } else {
       form.reset({
@@ -74,6 +77,7 @@ export function RoomFormDialog({
         pricePerNight: 0,
         capacity: 1,
         bedType: '',
+        imageUrl: '',
       });
     }
   }, [room, isOpen, form]);
@@ -172,6 +176,19 @@ export function RoomFormDialog({
                   <FormLabel>Bed Type</FormLabel>
                   <FormControl>
                     <Input placeholder="e.g., King, 2 Queens" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="imageUrl"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Image URL</FormLabel>
+                  <FormControl>
+                    <Input placeholder="https://example.com/image.jpg" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
