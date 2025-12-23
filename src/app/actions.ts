@@ -11,7 +11,8 @@ import {
   getMenuItems,
   getCategories,
 } from "@/lib/data";
-import type { Category, MenuItem } from "@/lib/types";
+import { addRoom, updateRoom, deleteRoom } from "@/lib/rooms-data";
+import type { Category, MenuItem, Room } from "@/lib/types";
 import { suggestMenuItem, SuggestMenuItemInput } from "@/ai/flows/suggest-menu-item";
 import { z } from "zod";
 
@@ -26,6 +27,15 @@ const itemSchema = z.object({
   itemType: z.string().min(2, "Item type is required."),
   categoryId: z.string().min(1, "Category is required."),
 });
+
+const roomSchema = z.object({
+  name: z.string().min(3, "Room name must be at least 3 characters."),
+  description: z.string().min(10, "Description must be at least 10 characters."),
+  pricePerNight: z.coerce.number().positive("Price must be a positive number."),
+  capacity: z.coerce.number().int().positive("Capacity must be a positive number."),
+  bedType: z.string().min(3, "Bed type is required."),
+});
+
 
 export async function addCategoryAction(formData: FormData) {
   const validatedFields = categorySchema.safeParse({
@@ -126,4 +136,50 @@ export async function getFullMenuAsString() {
   const categoryMap = new Map(categories.map(c => [c.id, c.name]));
 
   return items.map(item => `${item.name} (${categoryMap.get(item.categoryId) || 'Uncategorized'}): ${item.description}`).join('\n');
+}
+
+export async function addRoomAction(formData: FormData) {
+  const validatedFields = roomSchema.safeParse({
+    name: formData.get("name"),
+    description: formData.get("description"),
+    pricePerNight: formData.get("pricePerNight"),
+    capacity: formData.get("capacity"),
+    bedType: formData.get("bedType"),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      error: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+
+  await addRoom(validatedFields.data);
+  revalidatePath("/rooms");
+  revalidatePath("/admin");
+}
+
+export async function updateRoomAction(id: string, formData: FormData) {
+  const validatedFields = roomSchema.safeParse({
+    name: formData.get("name"),
+    description: formData.get("description"),
+    pricePerNight: formData.get("pricePerNight"),
+    capacity: formData.get("capacity"),
+    bedType: formData.get("bedType"),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      error: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+
+  await updateRoom(id, validatedFields.data);
+  revalidatePath("/rooms");
+  revalidatePath("/admin");
+}
+
+export async function deleteRoomAction(id: string) {
+  await deleteRoom(id);
+  revalidatePath("/rooms");
+  revalidatePath("/admin");
 }

@@ -13,3 +13,14 @@ export interface MenuItem {
   imageUrl: string;
   imageHint: string;
 }
+
+export interface Room {
+    id: string;
+    name: string;
+    description: string;
+    pricePerNight: number;
+    capacity: number;
+    bedType: string;
+    imageUrl: string;
+    imageHint: string;
+}
