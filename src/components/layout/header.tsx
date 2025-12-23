@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Bed, UserCog, Utensils, Menu } from 'lucide-react';
+import { Bed, UserCog, Utensils, Menu, CalendarCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
@@ -26,6 +26,12 @@ export function Header() {
             <Link href="/rooms">
               <Bed className="mr-2 h-4 w-4" />
               Rooms
+            </Link>
+          </Button>
+           <Button asChild variant="ghost" className="font-bold">
+            <Link href="/bookings">
+              <CalendarCheck className="mr-2 h-4 w-4" />
+              Bookings
             </Link>
           </Button>
           <Button asChild variant="ghost" className="font-bold">
@@ -64,6 +70,12 @@ export function Header() {
                         <Link href="/rooms">
                         <Bed className="mr-2 h-4 w-4" />
                         Rooms
+                        </Link>
+                    </Button>
+                    <Button asChild variant="ghost" className="font-bold justify-start">
+                        <Link href="/bookings">
+                            <CalendarCheck className="mr-2 h-4 w-4" />
+                            Bookings
                         </Link>
                     </Button>
                     <Button asChild variant="ghost" className="font-bold justify-start">

@@ -40,7 +40,7 @@ import type { Booking, Room, Customer } from '@/lib/types';
 interface BookingFormDialogProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
-  booking?: Booking;
+  booking?: Partial<Booking>;
   rooms: Room[];
   customers: Customer[];
 }
@@ -70,17 +70,14 @@ export function BookingFormDialog({
 
   useEffect(() => {
     if (isOpen) {
-      form.reset(
-        booking
-          ? { ...booking, checkIn: new Date(booking.checkIn), checkOut: new Date(booking.checkOut) }
-          : {
-              customerId: '',
-              roomId: '',
-              checkIn: undefined,
-              checkOut: undefined,
-              status: 'Confirmed',
-            }
-      );
+      const defaultValues = {
+        customerId: booking?.customerId || '',
+        roomId: booking?.roomId || '',
+        checkIn: booking?.checkIn ? new Date(booking.checkIn) : undefined,
+        checkOut: booking?.checkOut ? new Date(booking.checkOut) : undefined,
+        status: booking?.status || 'Confirmed',
+      };
+      form.reset(defaultValues);
     }
   }, [booking, isOpen, form]);
 
@@ -92,12 +89,12 @@ export function BookingFormDialog({
     formData.append('checkOut', values.checkOut.toISOString());
     formData.append('status', values.status);
 
-    const action = booking ? updateBookingAction.bind(null, booking.id) : addBookingAction;
+    const action = booking?.id ? updateBookingAction.bind(null, booking.id) : addBookingAction;
     await action(formData);
 
     toast({
-      title: booking ? 'Booking Updated' : 'Booking Added',
-      description: `The booking has been successfully ${booking ? 'updated' : 'created'}.`,
+      title: booking?.id ? 'Booking Updated' : 'Booking Added',
+      description: `The booking has been successfully ${booking?.id ? 'updated' : 'created'}.`,
     });
     setIsOpen(false);
   }
@@ -106,9 +103,9 @@ export function BookingFormDialog({
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>{booking ? 'Edit Booking' : 'Add New Booking'}</DialogTitle>
+          <DialogTitle>{booking?.id ? 'Edit Booking' : 'Add New Booking'}</DialogTitle>
           <DialogDescription>
-            {booking ? 'Update the details of this booking.' : 'Create a new room reservation.'}
+            {booking?.id ? 'Update the details of this booking.' : 'Create a new room reservation.'}
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
