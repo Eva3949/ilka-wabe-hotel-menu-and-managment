@@ -8,7 +8,8 @@ import { PlusCircle } from 'lucide-react';
 import { BookingsTable } from '@/components/admin/bookings-table';
 import { BookingFormDialog } from '@/components/admin/booking-form-dialog';
 import type { Booking, Room, Customer } from '@/lib/types';
-import { getBookings, getRooms, getCustomers } from '@/lib/data';
+import { getBookings, getCustomers } from '@/lib/data';
+import { getRooms } from '@/lib/rooms-data';
 
 export default function BookingsPage() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
