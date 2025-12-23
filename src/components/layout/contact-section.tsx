@@ -27,7 +27,7 @@ export function ContactSection() {
           </div>
           <div className="rounded-lg overflow-hidden shadow-lg h-64 md:h-80">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126093.07663479824!2d38.69176344335939!3d9.0222046!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b85cef5ab402d%3A0x8467b6b037a24d49!2sAddis%20Ababa%2C%20Ethiopia!5e0!3m2!1sen!2sus!4v1720539315578!5m2!1sen!2sus"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15781.879339171917!2d39.26536186738281!3d8.550737409813138!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b1fda21fb07d5%3A0x51e32f233a33b318!2sIlka%20Wabe%20Hotel!5e0!3m2!1sen!2set!4v1766474911782!5m2!1sen!2set"
               width="100%"
               height="100%"
               style={{ border: 0 }}
