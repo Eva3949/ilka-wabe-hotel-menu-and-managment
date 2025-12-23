@@ -1,9 +1,31 @@
+
+'use client';
+
 import Link from 'next/link';
-import { Bed, UserCog, Utensils, Menu, CalendarCheck } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import { Bed, UserCog, Utensils, Menu, CalendarCheck, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { useEffect, useState } from 'react';
 
 export function Header() {
+  const pathname = usePathname();
+  const router = useRouter();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    setIsAuthenticated(localStorage.getItem('isAuthenticated') === 'true');
+  }, [pathname]);
+
+
+  const handleLogout = () => {
+    localStorage.removeItem('isAuthenticated');
+    setIsAuthenticated(false);
+    router.push('/login');
+  };
+  
+  const isAdminPage = pathname.startsWith('/admin');
+
   return (
     <header className="bg-background/80 backdrop-blur-sm sticky top-0 z-40 border-b">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
@@ -15,7 +37,7 @@ export function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-2">
+        <nav className="hidden md:flex items-center gap-1">
           <Button asChild variant="ghost" className="font-bold">
             <Link href="/">
               <Utensils className="mr-2 h-4 w-4" />
@@ -37,9 +59,15 @@ export function Header() {
           <Button asChild variant="ghost" className="font-bold">
             <Link href="/admin">
               <UserCog className="mr-2 h-4 w-4" />
-              Admin Panel
+              Admin
             </Link>
           </Button>
+          {isAdminPage && isAuthenticated && (
+            <Button onClick={handleLogout} variant="ghost" className="font-bold text-destructive hover:text-destructive">
+                <LogOut className="mr-2 h-4 w-4" />
+                Logout
+            </Button>
+          )}
         </nav>
 
         {/* Mobile Navigation */}
@@ -81,9 +109,15 @@ export function Header() {
                     <Button asChild variant="ghost" className="font-bold justify-start">
                         <Link href="/admin">
                         <UserCog className="mr-2 h-4 w-4" />
-                        Admin Panel
+                        Admin
                         </Link>
                     </Button>
+                     {isAdminPage && isAuthenticated && (
+                        <Button onClick={handleLogout} variant="ghost" className="font-bold justify-start text-destructive hover:text-destructive">
+                            <LogOut className="mr-2 h-4 w-4" />
+                            Logout
+                        </Button>
+                    )}
                 </nav>
               </div>
             </SheetContent>

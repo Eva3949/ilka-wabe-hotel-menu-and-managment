@@ -1,14 +1,59 @@
+
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Header } from '@/components/layout/header';
 import { AdminDashboard } from '@/components/admin/admin-dashboard';
 import { getCategories, getMenuItems, getBookings, getCustomers } from '@/lib/data';
 import { getRooms } from '@/lib/rooms-data';
+import type { Category, MenuItem, Room, Booking, Customer } from '@/lib/types';
+import { Skeleton } from '@/components/ui/skeleton';
 
-export default async function AdminPage() {
-  const categories = await getCategories();
-  const menuItems = await getMenuItems();
-  const rooms = await getRooms();
-  const bookings = await getBookings();
-  const customers = await getCustomers();
+export default function AdminPage() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState<{
+    categories: Category[];
+    menuItems: MenuItem[];
+    rooms: Room[];
+    bookings: Booking[];
+    customers: Customer[];
+  } | null>(null);
+
+  useEffect(() => {
+    const isAuthenticated = localStorage.getItem('isAuthenticated');
+    if (isAuthenticated !== 'true') {
+      router.push('/login');
+    } else {
+        Promise.all([
+            getCategories(),
+            getMenuItems(),
+            getRooms(),
+            getBookings(),
+            getCustomers(),
+        ]).then(([categories, menuItems, rooms, bookings, customers]) => {
+            setData({ categories, menuItems, rooms, bookings, customers });
+            setLoading(false);
+        });
+    }
+  }, [router]);
+
+  if (loading || !data) {
+    return (
+        <div className="flex flex-col min-h-screen">
+            <Header />
+            <main className="flex-1 container mx-auto px-4 py-8">
+                 <div className="mb-8">
+                    <Skeleton className="h-10 w-1/2 mb-2" />
+                    <Skeleton className="h-4 w-3/4" />
+                </div>
+                <Skeleton className="w-full h-10 mb-4" />
+                <Skeleton className="w-full h-[400px]" />
+            </main>
+        </div>
+    );
+  }
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -19,11 +64,11 @@ export default async function AdminPage() {
           <p className="text-muted-foreground">Manage your hotel's operations from one central place.</p>
         </div>
         <AdminDashboard 
-          initialCategories={categories} 
-          initialMenuItems={menuItems}
-          initialRooms={rooms}
-          initialBookings={bookings}
-          initialCustomers={customers}
+          initialCategories={data.categories} 
+          initialMenuItems={data.menuItems}
+          initialRooms={data.rooms}
+          initialBookings={data.bookings}
+          initialCustomers={data.customers}
         />
       </main>
     </div>
