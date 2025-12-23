@@ -3,7 +3,7 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
-  title: 'Haile Restaurant and Spa',
+  title: 'ilka Wabe Hotel',
   description: 'A simple and elegant menu management system for cafes and restaurants.',
 };
 

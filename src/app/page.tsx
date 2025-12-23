@@ -20,7 +20,7 @@ export default async function Home() {
         <MenuDisplay categories={categories} items={menuItems} />
       </main>
       <footer className="py-6 text-center text-muted-foreground">
-        <p>&copy; {new Date().getFullYear()} Haile Restaurant and Spa. All Rights Reserved.</p>
+        <p>&copy; {new Date().getFullYear()} ilka Wabe Hotel. All Rights Reserved.</p>
       </footer>
     </div>
   );
