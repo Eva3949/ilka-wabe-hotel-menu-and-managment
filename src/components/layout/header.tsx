@@ -50,18 +50,22 @@ export function Header() {
               Rooms
             </Link>
           </Button>
-           <Button asChild variant="ghost" className="font-bold">
-            <Link href="/bookings">
-              <CalendarCheck className="mr-2 h-4 w-4" />
-              Bookings
-            </Link>
-          </Button>
-          <Button asChild variant="ghost" className="font-bold">
-            <Link href="/admin">
-              <UserCog className="mr-2 h-4 w-4" />
-              Admin
-            </Link>
-          </Button>
+          {isAuthenticated && (
+            <>
+              <Button asChild variant="ghost" className="font-bold">
+                <Link href="/bookings">
+                  <CalendarCheck className="mr-2 h-4 w-4" />
+                  Bookings
+                </Link>
+              </Button>
+              <Button asChild variant="ghost" className="font-bold">
+                <Link href="/admin">
+                  <UserCog className="mr-2 h-4 w-4" />
+                  Admin
+                </Link>
+              </Button>
+            </>
+          )}
           {isAdminPage && isAuthenticated && (
             <Button onClick={handleLogout} variant="ghost" className="font-bold text-destructive hover:text-destructive">
                 <LogOut className="mr-2 h-4 w-4" />
@@ -100,18 +104,22 @@ export function Header() {
                         Rooms
                         </Link>
                     </Button>
-                    <Button asChild variant="ghost" className="font-bold justify-start">
-                        <Link href="/bookings">
-                            <CalendarCheck className="mr-2 h-4 w-4" />
-                            Bookings
-                        </Link>
-                    </Button>
-                    <Button asChild variant="ghost" className="font-bold justify-start">
-                        <Link href="/admin">
-                        <UserCog className="mr-2 h-4 w-4" />
-                        Admin
-                        </Link>
-                    </Button>
+                    {isAuthenticated && (
+                        <>
+                            <Button asChild variant="ghost" className="font-bold justify-start">
+                                <Link href="/bookings">
+                                    <CalendarCheck className="mr-2 h-4 w-4" />
+                                    Bookings
+                                </Link>
+                            </Button>
+                            <Button asChild variant="ghost" className="font-bold justify-start">
+                                <Link href="/admin">
+                                <UserCog className="mr-2 h-4 w-4" />
+                                Admin
+                                </Link>
+                            </Button>
+                        </>
+                    )}
                      {isAdminPage && isAuthenticated && (
                         <Button onClick={handleLogout} variant="ghost" className="font-bold justify-start text-destructive hover:text-destructive">
                             <LogOut className="mr-2 h-4 w-4" />
