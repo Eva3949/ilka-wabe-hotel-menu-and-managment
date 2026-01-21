@@ -38,7 +38,7 @@ export function MenuItemCard({ item }: MenuItemCardProps) {
       </CardContent>
       <CardFooter className="p-6 pt-0">
         <p className="text-xl font-bold font-headline text-primary">
-          ${item.price.toFixed(2)}
+          {item.price.toFixed(2)} Birr
         </p>
       </CardFooter>
     </Card>

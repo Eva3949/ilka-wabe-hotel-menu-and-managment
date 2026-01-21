@@ -47,10 +47,10 @@ export function AnalyticsTab({ categories, menuItems, rooms, bookings }: Analyti
 
   const menuPriceDistribution = useMemo(() => {
     const bins = [
-      { name: '$0-10', count: 0 },
-      { name: '$10-15', count: 0 },
-      { name: '$15-20', count: 0 },
-      { name: '$20+', count: 0 },
+      { name: '0-10 Birr', count: 0 },
+      { name: '10-15 Birr', count: 0 },
+      { name: '15-20 Birr', count: 0 },
+      { name: '20+ Birr', count: 0 },
     ];
     menuItems.forEach(item => {
       if (item.price <= 10) bins[0].count++;
@@ -106,7 +106,7 @@ export function AnalyticsTab({ categories, menuItems, rooms, bookings }: Analyti
         </Card>
         <Card>
           <CardHeader><CardTitle>Avg. Room Price</CardTitle></CardHeader>
-          <CardContent><p className="text-4xl font-bold">${averageRoomPrice.toFixed(2)}</p></CardContent>
+          <CardContent><p className="text-4xl font-bold">{averageRoomPrice.toFixed(2)} Birr</p></CardContent>
         </Card>
          <Card>
           <CardHeader><CardTitle>Total Menu Items</CardTitle></CardHeader>

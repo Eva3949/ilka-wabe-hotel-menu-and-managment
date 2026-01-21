@@ -56,7 +56,7 @@ export function RoomsTable({ rooms }: RoomsTableProps) {
                 <TableCell className="font-medium">{room.name}</TableCell>
                 <TableCell>{room.capacity}</TableCell>
                 <TableCell>{room.bedType}</TableCell>
-                <TableCell className="text-right">${room.pricePerNight.toFixed(2)}</TableCell>
+                <TableCell className="text-right">{room.pricePerNight.toFixed(2)} Birr</TableCell>
                 <TableCell className="text-right">
                   <RoomActions room={room} />
                 </TableCell>
@@ -85,7 +85,7 @@ export function RoomsTable({ rooms }: RoomsTableProps) {
                 </div>
              </CardContent>
              <CardFooter>
-                 <div className="font-bold text-primary">${room.pricePerNight.toFixed(2)} / night</div>
+                 <div className="font-bold text-primary">{room.pricePerNight.toFixed(2)} Birr / night</div>
              </CardFooter>
           </Card>
         ))}

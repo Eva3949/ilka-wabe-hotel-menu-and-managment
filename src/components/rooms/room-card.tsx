@@ -51,7 +51,7 @@ export function RoomCard({ room }: RoomCardProps) {
       <CardFooter className="p-6 pt-0 flex justify-between items-center">
         <div>
           <p className="text-xl font-bold font-headline text-primary">
-            ${room.pricePerNight.toFixed(2)}
+            {room.pricePerNight.toFixed(2)} Birr
           </p>
           <p className="text-xs text-muted-foreground">per night</p>
         </div>
