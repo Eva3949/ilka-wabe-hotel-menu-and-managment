@@ -9,7 +9,7 @@ import { BookingsTab } from './bookings-tab';
 import { CustomersTab } from './customers-tab';
 import { AnalyticsTab } from './analytics-tab';
 import { List, LayoutGrid, BarChart2, BedDouble, CalendarDays, Users } from 'lucide-react';
-import { ScrollArea } from '@/components/ui/scroll-area';
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 
 interface AdminDashboardProps {
   initialCategories: Category[];
@@ -30,7 +30,7 @@ export function AdminDashboard({
     <Tabs defaultValue="bookings" className="w-full">
       <div className="md:hidden">
         <ScrollArea className="w-full whitespace-nowrap rounded-md">
-          <TabsList className="grid-cols-none w-max">
+          <TabsList>
             <TabsTrigger value="analytics"><BarChart2 className="mr-2 h-4 w-4" />Analytics</TabsTrigger>
             <TabsTrigger value="bookings"><CalendarDays className="mr-2 h-4 w-4" />Bookings</TabsTrigger>
             <TabsTrigger value="rooms"><BedDouble className="mr-2 h-4 w-4" />Rooms</TabsTrigger>
@@ -38,6 +38,7 @@ export function AdminDashboard({
             <TabsTrigger value="items"><LayoutGrid className="mr-2 h-4 w-4" />Menu Items</TabsTrigger>
             <TabsTrigger value="categories"><List className="mr-2 h-4 w-4" />Categories</TabsTrigger>
           </TabsList>
+          <ScrollBar orientation="horizontal" />
         </ScrollArea>
       </div>
       <TabsList className="hidden md:grid w-full grid-cols-6">
