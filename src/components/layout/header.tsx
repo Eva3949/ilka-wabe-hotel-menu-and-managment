@@ -13,12 +13,12 @@ export function Header() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    setIsAuthenticated(localStorage.getItem('isAuthenticated') === 'true');
+    setIsAuthenticated(sessionStorage.getItem('isAuthenticated') === 'true');
   }, [pathname]);
 
 
   const handleLogout = () => {
-    localStorage.removeItem('isAuthenticated');
+    sessionStorage.removeItem('isAuthenticated');
     setIsAuthenticated(false);
     router.push('/login');
   };

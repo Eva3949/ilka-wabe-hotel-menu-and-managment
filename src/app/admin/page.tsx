@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -22,7 +21,7 @@ export default function AdminPage() {
   } | null>(null);
 
   useEffect(() => {
-    const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+    const isAuthenticated = sessionStorage.getItem('isAuthenticated') === 'true';
     if (isAuthenticated) {
       setAuthStatus('authenticated');
       Promise.all([

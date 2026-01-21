@@ -22,7 +22,7 @@ export default function LoginPage() {
     // NOTE: This is a simple, insecure client-side authentication.
     // For a real application, use a proper authentication service.
     if (username === 'admin' && password === 'admin123') {
-      localStorage.setItem('isAuthenticated', 'true');
+      sessionStorage.setItem('isAuthenticated', 'true');
       router.push('/admin');
     } else {
       setError('Invalid username or password.');
