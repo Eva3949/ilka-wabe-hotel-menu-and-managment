@@ -11,6 +11,11 @@ export function Header() {
   const pathname = usePathname();
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     // Use sessionStorage to persist login state only for the session
@@ -61,44 +66,46 @@ export function Header() {
 
             {/* Mobile Navigation */}
             <div className="md:hidden">
-            <Sheet>
-                <SheetTrigger asChild>
-                <Button variant="ghost" size="icon">
-                    <Menu className="h-6 w-6" />
-                    <span className="sr-only">Open navigation menu</span>
-                </Button>
-                </SheetTrigger>
-                <SheetContent side="right">
-                <div className="flex flex-col gap-4 p-4">
-                    <Link href="/" className="flex items-center gap-2 mb-4">
-                        <Bed className="h-6 w-6 text-primary" />
-                        <span className="text-xl font-headline font-bold text-foreground">
-                            ilka Wabe Hotel
-                        </span>
-                    </Link>
-                    <nav className="flex flex-col gap-2">
-                        <Button asChild variant="ghost" className="font-bold justify-start">
-                            <Link href="/">
-                            <Utensils className="mr-2 h-4 w-4" />
-                            Menu
-                            </Link>
-                        </Button>
-                        <Button asChild variant="ghost" className="font-bold justify-start">
-                            <Link href="/rooms">
-                            <Bed className="mr-2 h-4 w-4" />
-                            Rooms
-                            </Link>
-                        </Button>
-                        {isAdminPage && isAuthenticated && (
-                            <Button onClick={handleLogout} variant="ghost" className="font-bold justify-start text-destructive hover:text-destructive">
-                                <LogOut className="mr-2 h-4 w-4" />
-                                Logout
+              {isClient && (
+                <Sheet>
+                    <SheetTrigger asChild>
+                    <Button variant="ghost" size="icon">
+                        <Menu className="h-6 w-6" />
+                        <span className="sr-only">Open navigation menu</span>
+                    </Button>
+                    </SheetTrigger>
+                    <SheetContent side="right">
+                    <div className="flex flex-col gap-4 p-4">
+                        <Link href="/" className="flex items-center gap-2 mb-4">
+                            <Bed className="h-6 w-6 text-primary" />
+                            <span className="text-xl font-headline font-bold text-foreground">
+                                ilka Wabe Hotel
+                            </span>
+                        </Link>
+                        <nav className="flex flex-col gap-2">
+                            <Button asChild variant="ghost" className="font-bold justify-start">
+                                <Link href="/">
+                                <Utensils className="mr-2 h-4 w-4" />
+                                Menu
+                                </Link>
                             </Button>
-                        )}
-                    </nav>
-                </div>
-                </SheetContent>
-            </Sheet>
+                            <Button asChild variant="ghost" className="font-bold justify-start">
+                                <Link href="/rooms">
+                                <Bed className="mr-2 h-4 w-4" />
+                                Rooms
+                                </Link>
+                            </Button>
+                            {isAdminPage && isAuthenticated && (
+                                <Button onClick={handleLogout} variant="ghost" className="font-bold justify-start text-destructive hover:text-destructive">
+                                    <LogOut className="mr-2 h-4 w-4" />
+                                    Logout
+                                </Button>
+                            )}
+                        </nav>
+                    </div>
+                    </SheetContent>
+                </Sheet>
+              )}
             </div>
         </div>
       </div>
