@@ -47,6 +47,7 @@ const formSchema = z.object({
   price: z.coerce.number().positive('Price must be a positive number.'),
   itemType: z.string().min(2, 'Item type is required.'),
   categoryId: z.string({ required_error: 'Please select a category.' }),
+  imageUrl: z.string().url("Please enter a valid URL.").optional().or(z.literal('')),
 });
 
 export function ItemFormDialog({
@@ -64,6 +65,7 @@ export function ItemFormDialog({
       price: 0,
       itemType: '',
       categoryId: '',
+      imageUrl: '',
     },
   });
 
@@ -75,6 +77,7 @@ export function ItemFormDialog({
         price: menuItem.price,
         itemType: menuItem.itemType,
         categoryId: menuItem.categoryId,
+        imageUrl: menuItem.imageUrl,
       });
     } else {
       form.reset({
@@ -83,6 +86,7 @@ export function ItemFormDialog({
         price: 0,
         itemType: '',
         categoryId: '',
+        imageUrl: '',
       });
     }
   }, [menuItem, isOpen, form]);
@@ -190,6 +194,19 @@ export function ItemFormDialog({
                       ))}
                     </SelectContent>
                   </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="imageUrl"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Image URL</FormLabel>
+                  <FormControl>
+                    <Input type="url" placeholder="https://example.com/image.jpg" {...field} />
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}

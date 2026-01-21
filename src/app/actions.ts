@@ -29,6 +29,7 @@ const itemSchema = z.object({
   price: z.coerce.number().positive("Price must be a positive number."),
   itemType: z.string().min(2, "Item type is required."),
   categoryId: z.string().min(1, "Category is required."),
+  imageUrl: z.string().url("Please enter a valid URL.").optional().or(z.literal('')),
 });
 
 const roomSchema = z.object({
@@ -100,6 +101,7 @@ export async function addMenuItemAction(formData: FormData) {
     price: formData.get("price"),
     itemType: formData.get("itemType"),
     categoryId: formData.get("categoryId"),
+    imageUrl: formData.get("imageUrl"),
   });
   
   if (!validatedFields.success) {
@@ -120,6 +122,7 @@ export async function updateMenuItemAction(id: string, formData: FormData) {
     price: formData.get("price"),
     itemType: formData.get("itemType"),
     categoryId: formData.get("categoryId"),
+    imageUrl: formData.get("imageUrl"),
   });
   
   if (!validatedFields.success) {

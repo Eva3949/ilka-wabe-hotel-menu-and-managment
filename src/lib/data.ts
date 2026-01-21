@@ -105,24 +105,42 @@ export async function getMenuItemById(id: string): Promise<MenuItem | undefined>
 }
 
 
-export async function addMenuItem(itemData: Omit<MenuItem, 'id' | 'imageUrl' | 'imageHint'>): Promise<MenuItem> {
+export async function addMenuItem(itemData: Omit<MenuItem, 'id' | 'imageUrl' | 'imageHint'> & { imageUrl?: string | null }): Promise<MenuItem> {
   await delay(200);
   const randomImage = placeholderImages[Math.floor(Math.random() * placeholderImages.length)];
   const newItem: MenuItem = {
     id: (menuItems.length + 1 + Math.random()).toString(),
-    ...itemData,
-    imageUrl: randomImage.imageUrl,
-    imageHint: randomImage.imageHint,
+    name: itemData.name,
+    description: itemData.description,
+    price: itemData.price,
+    itemType: itemData.itemType,
+    categoryId: itemData.categoryId,
+    imageUrl: itemData.imageUrl || randomImage.imageUrl,
+    imageHint: itemData.imageUrl ? '' : randomImage.imageHint,
   };
   menuItems.push(newItem);
   return newItem;
 }
 
-export async function updateMenuItem(id: string, itemData: Partial<Omit<MenuItem, 'id' | 'imageUrl' | 'imageHint'>>): Promise<MenuItem | null> {
+export async function updateMenuItem(id: string, itemData: Partial<Omit<MenuItem, 'id' | 'imageHint'>>): Promise<MenuItem | null> {
   await delay(200);
   const index = menuItems.findIndex(item => item.id === id);
   if (index === -1) return null;
-  menuItems[index] = { ...menuItems[index], ...itemData };
+  
+  const oldImageUrl = menuItems[index].imageUrl;
+  const updatedItem = { ...menuItems[index], ...itemData };
+
+  if (itemData.imageUrl && itemData.imageUrl !== oldImageUrl) {
+    updatedItem.imageHint = '';
+  }
+
+  if (itemData.imageUrl === '') {
+    const randomImage = placeholderImages[Math.floor(Math.random() * placeholderImages.length)];
+    updatedItem.imageUrl = randomImage.imageUrl;
+    updatedItem.imageHint = randomImage.imageHint;
+  }
+  
+  menuItems[index] = updatedItem;
   return menuItems[index];
 }
 
