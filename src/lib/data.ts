@@ -1,3 +1,4 @@
+import { unstable_noStore as noStore } from 'next/cache';
 import type { MenuItem, Category, Customer, Booking, Room } from './types';
 import { placeholderImages } from './placeholder-images.json';
 import { roomsData } from './rooms-data';
@@ -55,11 +56,13 @@ const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 // --- Category Functions ---
 
 export async function getCategories(): Promise<Category[]> {
+  noStore();
   await delay(100);
   return [...categories];
 }
 
 export async function getCategoryById(id: string): Promise<Category | undefined> {
+    noStore();
     await delay(100);
     return categories.find(c => c.id === id);
 }
@@ -95,11 +98,13 @@ export async function deleteCategory(id: string): Promise<boolean> {
 // --- Menu Item Functions ---
 
 export async function getMenuItems(): Promise<MenuItem[]> {
+  noStore();
   await delay(100);
   return [...menuItems];
 }
 
 export async function getMenuItemById(id: string): Promise<MenuItem | undefined> {
+    noStore();
     await delay(100);
     return menuItems.find(item => item.id === id);
 }
@@ -154,6 +159,7 @@ export async function deleteMenuItem(id: string): Promise<boolean> {
 // --- Customer Functions ---
 
 export async function getCustomers(): Promise<Customer[]> {
+  noStore();
   await delay(100);
   return [...customers];
 }
@@ -188,6 +194,7 @@ export async function deleteCustomer(id: string): Promise<boolean> {
 // --- Booking Functions ---
 
 export async function getBookings(): Promise<Booking[]> {
+    noStore();
     await delay(100);
     return [...bookings];
 }

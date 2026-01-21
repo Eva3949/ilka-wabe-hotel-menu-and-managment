@@ -1,3 +1,4 @@
+import { unstable_noStore as noStore } from 'next/cache';
 import type { Room } from './types';
 import { placeholderImages } from './placeholder-images.json';
 
@@ -50,11 +51,13 @@ const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 
 export async function getRooms(): Promise<Room[]> {
+  noStore();
   await delay(50);
   return [...rooms];
 }
 
 export async function getRoomById(id: string): Promise<Room | undefined> {
+    noStore();
     await delay(50);
     return rooms.find(r => r.id === id);
 }
