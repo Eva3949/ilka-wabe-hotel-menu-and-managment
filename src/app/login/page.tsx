@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Header } from '@/components/layout/header';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Terminal } from 'lucide-react';
-import { ContactSection } from '@/components/layout/contact-section';
+import { Footer } from '@/components/layout/footer';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
@@ -84,10 +84,7 @@ export default function LoginPage() {
           </CardContent>
         </Card>
       </main>
-       <ContactSection />
-       <footer className="py-6 text-center text-muted-foreground bg-secondary/50">
-        <p>&copy; {new Date().getFullYear()} ilka Wabe Hotel. All Rights Reserved.</p>
-      </footer>
+      <Footer />
     </div>
   );
 }

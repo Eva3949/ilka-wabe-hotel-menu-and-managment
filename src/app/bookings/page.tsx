@@ -10,7 +10,7 @@ import { BookingFormDialog } from '@/components/admin/booking-form-dialog';
 import type { Booking, Room, Customer } from '@/lib/types';
 import { getBookings, getCustomers } from '@/lib/data';
 import { getRooms } from '@/lib/rooms-data';
-import { ContactSection } from '@/components/layout/contact-section';
+import { Footer } from '@/components/layout/footer';
 
 export default function BookingsPage() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -63,10 +63,7 @@ export default function BookingsPage() {
         />
         <BookingsTable bookings={bookings} rooms={rooms} customers={customers} />
       </main>
-       <ContactSection />
-       <footer className="py-6 text-center text-muted-foreground bg-secondary/50">
-        <p>&copy; {new Date().getFullYear()} ilka Wabe Hotel. All Rights Reserved.</p>
-      </footer>
+      <Footer />
     </div>
   );
 }
