@@ -25,6 +25,7 @@ import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { addCustomerAction, updateCustomerAction } from '@/app/actions';
 import type { Customer } from '@/lib/types';
+import { useRouter } from 'next/navigation';
 
 interface CustomerFormDialogProps {
   isOpen: boolean;
@@ -44,6 +45,7 @@ export function CustomerFormDialog({
   customer,
 }: CustomerFormDialogProps) {
   const { toast } = useToast();
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -73,6 +75,7 @@ export function CustomerFormDialog({
         description: `"${values.name}" has been successfully ${customer ? 'updated' : 'added'}.`,
     });
     setIsOpen(false);
+    router.refresh();
   }
 
   return (

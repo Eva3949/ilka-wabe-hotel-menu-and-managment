@@ -13,6 +13,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface DeleteConfirmationDialogProps {
   isOpen: boolean;
@@ -31,6 +32,7 @@ export function DeleteConfirmationDialog({
 }: DeleteConfirmationDialogProps) {
     const [isDeleting, setIsDeleting] = useState(false);
     const { toast } = useToast();
+    const router = useRouter();
 
     const handleConfirm = async () => {
         setIsDeleting(true);
@@ -41,6 +43,7 @@ export function DeleteConfirmationDialog({
             title: `${itemType.charAt(0).toUpperCase() + itemType.slice(1)} Deleted`,
             description: `"${itemName}" has been successfully deleted.`,
         });
+        router.refresh();
     }
 
   return (

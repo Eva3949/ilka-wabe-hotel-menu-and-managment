@@ -25,6 +25,7 @@ import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { addCategoryAction, updateCategoryAction } from '@/app/actions';
 import type { Category } from '@/lib/types';
+import { useRouter } from 'next/navigation';
 
 interface CategoryFormDialogProps {
   isOpen: boolean;
@@ -42,6 +43,7 @@ export function CategoryFormDialog({
   category,
 }: CategoryFormDialogProps) {
   const { toast } = useToast();
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -70,6 +72,7 @@ export function CategoryFormDialog({
             description: `"${values.name}" has been successfully ${category ? 'updated' : 'added'}.`,
         });
         setIsOpen(false);
+        router.refresh();
     }
   }
 

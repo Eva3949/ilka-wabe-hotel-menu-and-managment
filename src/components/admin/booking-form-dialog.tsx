@@ -36,6 +36,7 @@ import { format } from 'date-fns';
 import { useToast } from '@/hooks/use-toast';
 import { addBookingAction, updateBookingAction } from '@/app/actions';
 import type { Booking, Room, Customer } from '@/lib/types';
+import { useRouter } from 'next/navigation';
 
 interface BookingFormDialogProps {
   isOpen: boolean;
@@ -61,6 +62,7 @@ export function BookingFormDialog({
   customers,
 }: BookingFormDialogProps) {
   const { toast } = useToast();
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -97,6 +99,7 @@ export function BookingFormDialog({
       description: `The booking has been successfully ${booking?.id ? 'updated' : 'created'}.`,
     });
     setIsOpen(false);
+    router.refresh();
   }
 
   return (

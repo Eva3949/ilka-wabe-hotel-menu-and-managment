@@ -26,6 +26,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { addRoomAction, updateRoomAction } from '@/app/actions';
 import type { Room } from '@/lib/types';
+import { useRouter } from 'next/navigation';
 
 interface RoomFormDialogProps {
   isOpen: boolean;
@@ -48,6 +49,7 @@ export function RoomFormDialog({
   room,
 }: RoomFormDialogProps) {
   const { toast } = useToast();
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -100,6 +102,7 @@ export function RoomFormDialog({
             description: `"${values.name}" has been successfully ${room ? 'updated' : 'added'}.`,
         });
         setIsOpen(false);
+        router.refresh();
     }
   }
 
