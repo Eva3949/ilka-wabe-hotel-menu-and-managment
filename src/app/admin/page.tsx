@@ -59,7 +59,7 @@ export default function AdminPage() {
       <Header />
       <main className="flex-1 container mx-auto px-4 pt-24 pb-8">
         <div className="mb-8">
-          <h1 className="text-4xl font-headline font-bold">Admin Dashboard</h1>
+          <h1 className="text-3xl md:text-4xl font-headline font-bold">Admin Dashboard</h1>
           <p className="text-muted-foreground">Manage your hotel's operations from one central place.</p>
         </div>
         <AdminDashboard 
