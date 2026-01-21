@@ -67,7 +67,7 @@ export async function getCategoryById(id: string): Promise<Category | undefined>
 export async function addCategory(categoryData: Omit<Category, 'id'>): Promise<Category> {
   await delay(200);
   const newCategory: Category = {
-    id: (categories.length + 1).toString(),
+    id: `cat_${Date.now()}`,
     ...categoryData,
   };
   categories.push(newCategory);
@@ -109,7 +109,7 @@ export async function addMenuItem(itemData: Omit<MenuItem, 'id' | 'imageUrl' | '
   await delay(200);
   const randomImage = placeholderImages[Math.floor(Math.random() * placeholderImages.length)];
   const newItem: MenuItem = {
-    id: (menuItems.length + 1 + Math.random()).toString(),
+    id: `item_${Date.now()}`,
     name: itemData.name,
     description: itemData.description,
     price: itemData.price,
@@ -161,7 +161,7 @@ export async function getCustomers(): Promise<Customer[]> {
 export async function addCustomer(customerData: Omit<Customer, 'id'>): Promise<Customer> {
   await delay(200);
   const newCustomer: Customer = {
-    id: (customers.length + 1 + Math.random()).toString(),
+    id: `cust_${Date.now()}`,
     ...customerData,
   };
   customers.push(newCustomer);
@@ -195,7 +195,7 @@ export async function getBookings(): Promise<Booking[]> {
 export async function addBooking(bookingData: Omit<Booking, 'id'>): Promise<Booking> {
     await delay(200);
     const newBooking: Booking = {
-        id: (bookings.length + 1 + Math.random()).toString(),
+        id: `book_${Date.now()}`,
         ...bookingData,
     };
     bookings.push(newBooking);

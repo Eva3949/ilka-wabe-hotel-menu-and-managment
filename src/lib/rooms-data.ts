@@ -63,7 +63,7 @@ export async function addRoom(roomData: Omit<Room, 'id' | 'imageHint'>): Promise
   await delay(200);
   const randomImage = placeholderImages[Math.floor(Math.random() * placeholderImages.length)];
   const newRoom: Room = {
-    id: (rooms.length + 1 + Math.random()).toString(),
+    id: `room_${Date.now()}`,
     ...roomData,
     imageUrl: roomData.imageUrl || randomImage.imageUrl,
     imageHint: 'hotel room', // generic hint
