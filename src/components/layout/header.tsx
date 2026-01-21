@@ -1,9 +1,8 @@
-
 'use client';
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Bed, UserCog, Utensils, Menu, CalendarCheck, LogOut } from 'lucide-react';
+import { Bed, Utensils, Menu, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useEffect, useState } from 'react';
@@ -27,8 +26,7 @@ export function Header() {
   const isAdminPage = pathname.startsWith('/admin');
 
   return (
-    <header className="bg-background/80 backdrop-blur-sm sticky top-0 z-40 border-b">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4">
+    <header className="sticky top-4 z-50 container mx-auto flex h-16 items-center justify-between rounded-full bg-background/90 backdrop-blur-sm border px-6 shadow-lg">
         <Link href="/" className="flex items-center gap-2">
           <Bed className="h-6 w-6 text-primary" />
           <span className="text-xl font-headline font-bold text-foreground">
@@ -50,22 +48,6 @@ export function Header() {
               Rooms
             </Link>
           </Button>
-          {isAuthenticated && (
-            <>
-              <Button asChild variant="ghost" className="font-bold">
-                <Link href="/bookings">
-                  <CalendarCheck className="mr-2 h-4 w-4" />
-                  Bookings
-                </Link>
-              </Button>
-              <Button asChild variant="ghost" className="font-bold">
-                <Link href="/admin">
-                  <UserCog className="mr-2 h-4 w-4" />
-                  Admin
-                </Link>
-              </Button>
-            </>
-          )}
           {isAdminPage && isAuthenticated && (
             <Button onClick={handleLogout} variant="ghost" className="font-bold text-destructive hover:text-destructive">
                 <LogOut className="mr-2 h-4 w-4" />
@@ -104,22 +86,6 @@ export function Header() {
                         Rooms
                         </Link>
                     </Button>
-                    {isAuthenticated && (
-                        <>
-                            <Button asChild variant="ghost" className="font-bold justify-start">
-                                <Link href="/bookings">
-                                    <CalendarCheck className="mr-2 h-4 w-4" />
-                                    Bookings
-                                </Link>
-                            </Button>
-                            <Button asChild variant="ghost" className="font-bold justify-start">
-                                <Link href="/admin">
-                                <UserCog className="mr-2 h-4 w-4" />
-                                Admin
-                                </Link>
-                            </Button>
-                        </>
-                    )}
                      {isAdminPage && isAuthenticated && (
                         <Button onClick={handleLogout} variant="ghost" className="font-bold justify-start text-destructive hover:text-destructive">
                             <LogOut className="mr-2 h-4 w-4" />
@@ -131,7 +97,6 @@ export function Header() {
             </SheetContent>
           </Sheet>
         </div>
-      </div>
     </header>
   );
 }
