@@ -7,7 +7,7 @@ export default function RoomsPage() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex-1 container mx-auto px-4 pt-24 pb-8">
+      <main className="flex-1 container mx-auto px-4 py-8">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-headline font-bold tracking-tight text-foreground mt-2">
             Our Rooms
