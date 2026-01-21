@@ -12,7 +12,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 export default function AdminPage() {
   const router = useRouter();
-  const [loading, setLoading] = useState(true);
+  const [authStatus, setAuthStatus] = useState<'checking' | 'authenticated'>('checking');
   const [data, setData] = useState<{
     categories: Category[];
     menuItems: MenuItem[];
@@ -22,24 +22,24 @@ export default function AdminPage() {
   } | null>(null);
 
   useEffect(() => {
-    const isAuthenticated = localStorage.getItem('isAuthenticated');
-    if (isAuthenticated !== 'true') {
-      router.push('/login');
+    const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+    if (isAuthenticated) {
+      setAuthStatus('authenticated');
+      Promise.all([
+          getCategories(),
+          getMenuItems(),
+          getRooms(),
+          getBookings(),
+          getCustomers(),
+      ]).then(([categories, menuItems, rooms, bookings, customers]) => {
+          setData({ categories, menuItems, rooms, bookings, customers });
+      });
     } else {
-        Promise.all([
-            getCategories(),
-            getMenuItems(),
-            getRooms(),
-            getBookings(),
-            getCustomers(),
-        ]).then(([categories, menuItems, rooms, bookings, customers]) => {
-            setData({ categories, menuItems, rooms, bookings, customers });
-            setLoading(false);
-        });
+      router.push('/login');
     }
   }, [router]);
 
-  if (loading || !data) {
+  if (authStatus !== 'authenticated' || !data) {
     return (
         <div className="flex flex-col min-h-screen">
             <Header />
