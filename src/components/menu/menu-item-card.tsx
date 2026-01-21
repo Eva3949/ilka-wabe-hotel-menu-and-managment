@@ -16,7 +16,7 @@ interface MenuItemCardProps {
 
 export function MenuItemCard({ item }: MenuItemCardProps) {
   return (
-    <Card className="overflow-hidden flex flex-col group border-2 border-transparent shadow-lg hover:border-primary/50 hover:shadow-2xl transition-all duration-300">
+    <Card className="overflow-hidden flex flex-col group border-2 border-transparent shadow-lg shadow-primary/20 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300">
       <CardHeader className="p-0">
         <div className="aspect-video overflow-hidden">
           <Image
