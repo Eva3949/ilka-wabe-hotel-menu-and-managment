@@ -27,7 +27,7 @@ export function Header() {
   const isAdminPage = pathname.startsWith('/admin');
 
   return (
-    <header className="sticky top-4 z-50 container mx-auto flex h-16 items-center justify-between rounded-full bg-background/90 backdrop-blur-sm border px-6 shadow-xl">
+    <header className="absolute top-4 left-0 right-0 z-50 container mx-auto flex h-16 items-center justify-between rounded-full bg-background/90 backdrop-blur-sm border px-6 shadow-xl">
         <Link href="/" className="flex items-center gap-2">
           <Bed className="h-6 w-6 text-primary" />
           <span className="text-xl font-headline font-bold text-foreground">

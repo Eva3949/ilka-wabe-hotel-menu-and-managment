@@ -44,7 +44,7 @@ export default function BookingsPage() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex-1 container mx-auto px-4 py-8">
+      <main className="flex-1 container mx-auto px-4 pt-24 pb-8">
         <div className="flex justify-between items-center mb-8">
             <div>
                 <h1 className="text-4xl font-headline font-bold">My Bookings</h1>

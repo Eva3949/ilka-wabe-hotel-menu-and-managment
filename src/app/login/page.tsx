@@ -32,7 +32,7 @@ export default function LoginPage() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex-1 flex items-center justify-center bg-muted/40 py-12">
+      <main className="flex-1 flex items-center justify-center bg-muted/40 pb-12 pt-24">
         <Card className="w-full max-w-sm">
           <CardHeader className="text-center">
             <CardTitle className="text-2xl font-headline">Admin Login</CardTitle>
