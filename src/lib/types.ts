@@ -40,3 +40,10 @@ export interface Booking {
   checkOut: string;
   status: 'Confirmed' | 'Checked-In' | 'Checked-Out' | 'Cancelled';
 }
+
+export interface Admin {
+  id: string;
+  username: string;
+  password?: string;
+  role: 'owner' | 'receptionist';
+}

@@ -1,9 +1,10 @@
 import { Header } from '@/components/layout/header';
-import { RoomCard } from '@/components/rooms/room-card';
-import { roomsData } from '@/lib/rooms-data';
+import { RoomsDisplay } from '@/components/rooms/rooms-display';
+import { getRooms } from '@/lib/rooms-data';
 import { Footer } from '@/components/layout/footer';
 
-export default function RoomsPage() {
+export default async function RoomsPage() {
+  const rooms = await getRooms();
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
@@ -16,11 +17,7 @@ export default function RoomsPage() {
             Comfort, elegance, and tranquility await. Choose the perfect space for your stay.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {roomsData.map((room) => (
-            <RoomCard key={room.id} room={room} />
-          ))}
-        </div>
+        <RoomsDisplay rooms={rooms} />
       </main>
       <Footer />
     </div>

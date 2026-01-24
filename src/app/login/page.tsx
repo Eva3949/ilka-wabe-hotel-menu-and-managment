@@ -11,21 +11,39 @@ import { Header } from '@/components/layout/header';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Terminal } from 'lucide-react';
 import { Footer } from '@/components/layout/footer';
+import { loginAction } from '@/app/actions';
+import { useToast } from '@/hooks/use-toast';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const { toast } = useToast();
 
-  const handleLogin = () => {
-    // NOTE: This is a simple, insecure client-side authentication.
-    // For a real application, use a proper authentication service.
-    if (username === 'admin' && password === 'admin123') {
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('password', password);
+
+    const result = await loginAction(formData);
+
+    if (result?.error) {
+      toast({
+        title: "Login Failed",
+        description: result.error,
+        variant: "destructive",
+      });
+      setIsLoading(false);
+    } else if (result?.success) {
       sessionStorage.setItem('isAuthenticated', 'true');
+      sessionStorage.setItem('userRole', result.role || '');
+      sessionStorage.setItem('lastActivity', Date.now().toString());
       router.push('/admin');
-    } else {
-      setError('Invalid username or password.');
+      router.refresh();
     }
   };
 
@@ -40,10 +58,7 @@ export default function LoginPage() {
           </CardHeader>
           <CardContent>
             <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                handleLogin();
-              }}
+              onSubmit={handleLogin}
               className="space-y-4"
             >
               <div className="space-y-2">
@@ -68,17 +83,8 @@ export default function LoginPage() {
                   required
                 />
               </div>
-              {error && (
-                 <Alert variant="destructive">
-                    <Terminal className="h-4 w-4" />
-                    <AlertTitle>Login Failed</AlertTitle>
-                    <AlertDescription>
-                        {error}
-                    </AlertDescription>
-                </Alert>
-              )}
-              <Button type="submit" className="w-full">
-                Login
+              <Button type="submit" className="w-full" disabled={isLoading}>
+                {isLoading ? "Logging in..." : "Login"}
               </Button>
             </form>
           </CardContent>

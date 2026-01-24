@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import type { Room } from "@/lib/rooms-data";
+import type { Room } from "@/lib/types";
 import { Button } from "../ui/button";
 import { BedDouble, Users } from "lucide-react";
 
@@ -23,7 +23,7 @@ export function RoomCard({ room }: RoomCardProps) {
       <CardHeader className="p-0">
         <div className="aspect-video overflow-hidden">
           <Image
-            src={room.imageUrl}
+            src={room.imageUrl || 'https://picsum.photos/seed/room/600/400'}
             alt={room.name}
             width={600}
             height={400}

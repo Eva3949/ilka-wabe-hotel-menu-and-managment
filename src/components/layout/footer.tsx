@@ -97,7 +97,7 @@ export function Footer() {
                     <Link href="#" className="hover:text-primary transition-colors">Terms & Conditions</Link>
                     <Link href="#" className="hover:text-primary transition-colors">Cancellation Policy</Link>
                 </div>
-                 <p className="text-center md:text-right">Developed by <a href="#" className="hover:text-primary transition-colors font-medium">Studio</a></p>
+                 <p className="text-center md:text-right">Developed by <a href="#" className="hover:text-primary transition-colors font-medium">EvaDevStudio</a></p>
             </div>
         </div>
       </div>

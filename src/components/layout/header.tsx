@@ -2,15 +2,17 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Bed, Utensils, Menu, LogOut } from 'lucide-react';
+import { Bed, Utensils, Menu, LogOut, ShieldCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useEffect, useState } from 'react';
+import { logoutAction } from '@/app/actions';
 
 export function Header() {
   const pathname = usePathname();
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userRole, setUserRole] = useState<string | null>(null);
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -20,13 +22,18 @@ export function Header() {
   useEffect(() => {
     // Use sessionStorage to persist login state only for the session
     setIsAuthenticated(sessionStorage.getItem('isAuthenticated') === 'true');
+    setUserRole(sessionStorage.getItem('userRole'));
   }, [pathname]);
 
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await logoutAction();
     sessionStorage.removeItem('isAuthenticated');
+    sessionStorage.removeItem('userRole');
     setIsAuthenticated(false);
+    setUserRole(null);
     router.push('/login');
+    router.refresh();
   };
   
   const isAdminPage = pathname.startsWith('/admin');
