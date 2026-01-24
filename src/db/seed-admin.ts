@@ -1,6 +1,7 @@
 import { db } from '../lib/db';
 import { admins } from './schema';
 import bcrypt from 'bcryptjs';
+// @ts-ignore
 import { v4 as uuidv4 } from 'uuid';
 
 async function seed() {

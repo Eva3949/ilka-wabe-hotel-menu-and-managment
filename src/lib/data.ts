@@ -196,7 +196,10 @@ export async function getAdmins(): Promise<Admin[]> {
 export async function getAdminByUsername(username: string): Promise<Admin | null> {
   noStore();
   const result = await db.select().from(admins).where(eq(admins.username, username));
-  return result[0] || null;
+  const admin = result[0];
+  if (!admin) return null;
+  const { password, ...rest } = admin;
+  return rest as Admin;
 }
 
 export async function addAdmin(adminData: Omit<Admin, 'id'>): Promise<Admin> {
