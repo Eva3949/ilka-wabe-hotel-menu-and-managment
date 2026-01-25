@@ -1,5 +1,3 @@
-'use server';
-
 import { Header } from '@/components/layout/header';
 import { AdminDashboard } from '@/components/admin/admin-dashboard';
 import { getCategories, getMenuItems, getBookings, getCustomers, getAdmins } from '@/lib/data';
