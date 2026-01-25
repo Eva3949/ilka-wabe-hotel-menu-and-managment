@@ -3,6 +3,7 @@ import mysql from "mysql2/promise";
 import * as schema from "../db/schema";
 import 'dotenv/config';
 import "server-only";
+
 const connectionString = process.env.DATABASE_URL!;
 
 // Prevent multiple pools in development
