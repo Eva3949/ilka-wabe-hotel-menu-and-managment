@@ -1,5 +1,3 @@
-'use server';
-
 import { unstable_noStore as noStore } from 'next/cache';
 import type { MenuItem, Category, Customer, Booking, Admin } from './types';
 import { db } from './db';

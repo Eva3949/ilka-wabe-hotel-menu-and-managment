@@ -18,8 +18,12 @@ import {
   addAdmin,
   getAdmins,
   deleteAdmin,
+  getCategories,
+  getMenuItems,
+  getBookings,
+  getCustomers,
 } from "@/lib/data";
-import { addRoom, updateRoom, deleteRoom } from "@/lib/rooms-data";
+import { addRoom, updateRoom, deleteRoom, getRooms } from "@/lib/rooms-data";
 import type { Category, MenuItem, Room, Customer, Booking, Admin } from "@/lib/types";
 import { z } from "zod";
 import bcrypt from "bcryptjs";
@@ -373,6 +377,27 @@ export async function addWorkerAction(formData: FormData) {
 
   revalidatePath("/admin");
   return { success: true };
+}
+
+// Data Fetching Actions for Client Components
+export async function getCategoriesAction() {
+  return await getCategories();
+}
+
+export async function getMenuItemsAction() {
+  return await getMenuItems();
+}
+
+export async function getBookingsAction() {
+  return await getBookings();
+}
+
+export async function getCustomersAction() {
+  return await getCustomers();
+}
+
+export async function getRoomsAction() {
+  return await getRooms();
 }
 
 export async function deleteAdminAction(id: string) {

@@ -1,5 +1,3 @@
-'use server';
-
 import { unstable_noStore as noStore } from 'next/cache';
 import type { Room } from './types';
 import { db } from './db';
@@ -56,5 +54,5 @@ export async function deleteRoom(id: string): Promise<boolean> {
   }
 }
 
-// For compatibility with existing imports - removed for "use server" compliance
-// export const roomsData: Room[] = []; 
+// For compatibility with existing imports
+export const roomsData: Room[] = []; 

@@ -5,8 +5,18 @@ import 'dotenv/config';
 import "server-only";
 const connectionString = process.env.DATABASE_URL!;
 
-// For XAMPP MySQL, sometimes we need to be explicit with the connection config
-// especially if the URL parsing has issues with empty passwords
-const poolConnection = mysql.createPool(connectionString);
+// Prevent multiple pools in development
+const globalForDb = global as unknown as { pool: mysql.Pool | undefined };
+
+const poolConnection = globalForDb.pool ?? mysql.createPool({
+  uri: connectionString,
+  connectionLimit: 1, // Be very conservative with free tier connections
+  maxIdle: 1,
+  idleTimeout: 60000,
+  enableKeepAlive: true,
+  keepAliveInitialDelay: 0,
+});
+
+if (process.env.NODE_ENV !== "production") globalForDb.pool = poolConnection;
 
 export const db = drizzle(poolConnection, { schema, mode: 'default' });
