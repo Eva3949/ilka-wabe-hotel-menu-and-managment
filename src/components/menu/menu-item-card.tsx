@@ -9,6 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { formatCurrency } from "@/lib/utils";
 
 interface MenuItemCardProps {
   item: MenuItem;
@@ -38,7 +39,7 @@ export function MenuItemCard({ item }: MenuItemCardProps) {
       </CardContent>
       <CardFooter className="p-6 pt-0">
         <p className="text-xl font-bold font-headline text-primary">
-          {item.price.toFixed(2)} Birr
+          {formatCurrency(item.price)} Birr
         </p>
       </CardFooter>
     </Card>

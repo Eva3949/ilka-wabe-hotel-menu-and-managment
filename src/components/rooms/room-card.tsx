@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import type { Room } from "@/lib/types";
 import { Button } from "../ui/button";
 import { BedDouble, Users } from "lucide-react";
+import { formatCurrency } from "@/lib/utils";
 
 interface RoomCardProps {
   room: Room;
@@ -51,7 +52,7 @@ export function RoomCard({ room }: RoomCardProps) {
       <CardFooter className="p-6 pt-0 flex justify-between items-center">
         <div>
           <p className="text-xl font-bold font-headline text-primary">
-            {room.pricePerNight.toFixed(2)} Birr
+            {formatCurrency(room.pricePerNight)} Birr
           </p>
           <p className="text-xs text-muted-foreground">per night</p>
         </div>

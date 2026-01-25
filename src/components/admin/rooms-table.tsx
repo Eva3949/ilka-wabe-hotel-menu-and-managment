@@ -11,6 +11,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import { RoomActions } from './room-actions';
 import Image from 'next/image';
 import { BedDouble, Users } from 'lucide-react';
+import { formatCurrency } from '@/lib/utils';
 
 interface RoomsTableProps {
   rooms: Room[];
@@ -56,7 +57,7 @@ export function RoomsTable({ rooms }: RoomsTableProps) {
                 <TableCell className="font-medium">{room.name}</TableCell>
                 <TableCell>{room.capacity}</TableCell>
                 <TableCell>{room.bedType}</TableCell>
-                <TableCell className="text-right">{room.pricePerNight.toFixed(2)} Birr</TableCell>
+                <TableCell className="text-right">{formatCurrency(room.pricePerNight)} Birr</TableCell>
                 <TableCell className="text-right">
                   <RoomActions room={room} />
                 </TableCell>
@@ -85,7 +86,7 @@ export function RoomsTable({ rooms }: RoomsTableProps) {
                 </div>
              </CardContent>
              <CardFooter>
-                 <div className="font-bold text-primary">{room.pricePerNight.toFixed(2)} Birr / night</div>
+                 <div className="font-bold text-primary">{formatCurrency(room.pricePerNight)} Birr / night</div>
              </CardFooter>
           </Card>
         ))}

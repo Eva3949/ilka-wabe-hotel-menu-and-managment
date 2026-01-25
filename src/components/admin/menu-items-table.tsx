@@ -11,6 +11,7 @@ import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/componen
 import { ItemActions } from './item-actions';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
+import { formatCurrency } from '@/lib/utils';
 
 interface MenuItemsTableProps {
   menuItems: MenuItem[];
@@ -59,7 +60,7 @@ export function MenuItemsTable({ menuItems, categories }: MenuItemsTableProps) {
                 <TableCell className="font-medium">{item.name}</TableCell>
                 <TableCell>{categoryMap.get(item.categoryId) || 'N/A'}</TableCell>
                 <TableCell>{item.itemType}</TableCell>
-                <TableCell className="text-right">{item.price.toFixed(2)} Birr</TableCell>
+                <TableCell className="text-right">{formatCurrency(item.price)} Birr</TableCell>
                 <TableCell className="text-right">
                   <ItemActions item={item} categories={categories} />
                 </TableCell>
@@ -82,7 +83,7 @@ export function MenuItemsTable({ menuItems, categories }: MenuItemsTableProps) {
              </CardHeader>
              <CardContent className="flex justify-between items-center">
                 <Badge variant="secondary">{item.itemType}</Badge>
-                <div className="font-bold text-primary">{item.price.toFixed(2)} Birr</div>
+                <div className="font-bold text-primary">{formatCurrency(item.price)} Birr</div>
              </CardContent>
           </Card>
         ))}

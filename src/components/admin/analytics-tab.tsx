@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Pie, PieChart, Cell, Tooltip } from 'recharts';
 import { ChartContainer, ChartTooltipContent } from '@/components/ui/chart';
 import { useMemo } from 'react';
+import { formatCurrency } from '@/lib/utils';
 
 interface AnalyticsTabProps {
   categories: Category[];
@@ -53,9 +54,10 @@ export function AnalyticsTab({ categories, menuItems, rooms, bookings }: Analyti
       { name: '20+ Birr', count: 0 },
     ];
     menuItems.forEach(item => {
-      if (item.price <= 10) bins[0].count++;
-      else if (item.price <= 15) bins[1].count++;
-      else if (item.price <= 20) bins[2].count++;
+      const price = Number(item.price);
+      if (price <= 10) bins[0].count++;
+      else if (price <= 15) bins[1].count++;
+      else if (price <= 20) bins[2].count++;
       else bins[3].count++;
     });
     return bins;
@@ -63,7 +65,7 @@ export function AnalyticsTab({ categories, menuItems, rooms, bookings }: Analyti
 
   const averageMenuPrice = useMemo(() => {
     if (menuItems.length === 0) return 0;
-    const total = menuItems.reduce((sum, item) => sum + item.price, 0);
+    const total = menuItems.reduce((sum, item) => sum + Number(item.price), 0);
     return total / menuItems.length;
   }, [menuItems]);
 
@@ -71,7 +73,7 @@ export function AnalyticsTab({ categories, menuItems, rooms, bookings }: Analyti
   
   const averageRoomPrice = useMemo(() => {
     if (rooms.length === 0) return 0;
-    const total = rooms.reduce((sum, room) => sum + room.pricePerNight, 0);
+    const total = rooms.reduce((sum, room) => sum + Number(room.pricePerNight), 0);
     return total / rooms.length;
   }, [rooms]);
 
@@ -106,7 +108,7 @@ export function AnalyticsTab({ categories, menuItems, rooms, bookings }: Analyti
         </Card>
         <Card>
           <CardHeader><CardTitle>Avg. Room Price</CardTitle></CardHeader>
-          <CardContent><p className="text-4xl font-bold">{averageRoomPrice.toFixed(2)} Birr</p></CardContent>
+          <CardContent><p className="text-4xl font-bold">{formatCurrency(averageRoomPrice)} Birr</p></CardContent>
         </Card>
          <Card>
           <CardHeader><CardTitle>Total Menu Items</CardTitle></CardHeader>
