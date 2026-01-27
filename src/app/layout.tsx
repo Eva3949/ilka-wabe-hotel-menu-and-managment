@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
+import { I18nProvider } from '@/lib/i18n/i18n-context';
 
 export const metadata: Metadata = {
   title: 'ilka Wabe Hotel',
@@ -20,8 +21,10 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body antialiased min-h-screen">
-        {children}
-        <Toaster />
+        <I18nProvider>
+          {children}
+          <Toaster />
+        </I18nProvider>
       </body>
     </html>
   );

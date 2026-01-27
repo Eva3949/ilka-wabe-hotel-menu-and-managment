@@ -1,6 +1,8 @@
+'use client';
 
 import Link from 'next/link';
 import { Bed, MapPin, Phone, Mail, Facebook, Instagram, Youtube } from 'lucide-react';
+import { useI18n } from '@/lib/i18n/i18n-context';
 
 const TikTokIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
@@ -18,6 +20,7 @@ const WhatsAppIcon = () => (
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const { t } = useI18n();
 
   return (
     <footer className="bg-secondary/50 border-t">
@@ -32,7 +35,7 @@ export function Footer() {
                 </span>
             </Link>
             <p className="text-muted-foreground text-sm mb-6">
-              Experience comfort, elegance, and tranquility. Your perfect stay awaits.
+              {t('footer.description')}
             </p>
             <div className="flex space-x-4">
               <Link href="#" aria-label="Facebook" className="text-muted-foreground hover:text-primary transition-colors"><Facebook className="h-5 w-5" /></Link>
@@ -44,19 +47,19 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-md font-headline font-semibold mb-4">Quick Links</h3>
+            <h3 className="text-md font-headline font-semibold mb-4">{t('footer.quickLinks')}</h3>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/" className="text-muted-foreground hover:text-primary transition-colors">Home</Link></li>
-              <li><Link href="/" className="text-muted-foreground hover:text-primary transition-colors">Menu</Link></li>
-              <li><Link href="/rooms" className="text-muted-foreground hover:text-primary transition-colors">Rooms</Link></li>
-              <li><Link href="/bookings" className="text-muted-foreground hover:text-primary transition-colors">Reservation</Link></li>
-              <li><Link href="#" className="text-muted-foreground hover:text-primary transition-colors">About Us</Link></li>
-              <li><Link href="#" className="text-muted-foreground hover:text-primary transition-colors">Contact Us</Link></li>
+              <li><Link href="/" className="text-muted-foreground hover:text-primary transition-colors">{t('nav.home')}</Link></li>
+              <li><Link href="/" className="text-muted-foreground hover:text-primary transition-colors">{t('nav.menu')}</Link></li>
+              <li><Link href="/rooms" className="text-muted-foreground hover:text-primary transition-colors">{t('nav.rooms')}</Link></li>
+              <li><Link href="/bookings" className="text-muted-foreground hover:text-primary transition-colors">{t('nav.reservation')}</Link></li>
+              <li><Link href="#" className="text-muted-foreground hover:text-primary transition-colors">{t('nav.about')}</Link></li>
+              <li><Link href="#" className="text-muted-foreground hover:text-primary transition-colors">{t('nav.contact')}</Link></li>
             </ul>
           </div>
 
            <div>
-            <h3 className="text-md font-headline font-semibold mb-4">Contact</h3>
+            <h3 className="text-md font-headline font-semibold mb-4">{t('footer.contact')}</h3>
              <div className="space-y-3 text-sm">
               <div className="flex items-start">
                 <MapPin className="h-4 w-4 mr-3 mt-1 text-primary flex-shrink-0" />
@@ -74,14 +77,14 @@ export function Footer() {
           </div>
           
           <div>
-            <h3 className="text-md font-headline font-semibold mb-4">Opening Hours</h3>
+            <h3 className="text-md font-headline font-semibold mb-4">{t('footer.openingHours')}</h3>
             <div className="text-sm space-y-3 text-muted-foreground">
               <div>
-                <p className="font-semibold text-foreground">Restaurant:</p>
+                <p className="font-semibold text-foreground">{t('footer.restaurant')}:</p>
                 <p>7:00 AM - 10:00 PM</p>
               </div>
                <div>
-                <p className="font-semibold text-foreground">Booking Desk:</p>
+                <p className="font-semibold text-foreground">{t('footer.bookingDesk')}:</p>
                 <p>24/7 Available</p>
               </div>
             </div>
@@ -91,13 +94,13 @@ export function Footer() {
 
         <div className="mt-12 border-t border-border pt-8">
             <div className="flex flex-col-reverse md:flex-row justify-between items-center text-sm text-muted-foreground gap-4">
-                <p className="text-center md:text-left">&copy; {currentYear} ilka Wabe Hotel. All rights reserved.</p>
+                <p className="text-center md:text-left">&copy; {currentYear} ilka Wabe Hotel. {t('footer.rights')}</p>
                 <div className="flex flex-wrap justify-center gap-x-4 gap-y-2">
-                    <Link href="#" className="hover:text-primary transition-colors">Privacy Policy</Link>
-                    <Link href="#" className="hover:text-primary transition-colors">Terms & Conditions</Link>
-                    <Link href="#" className="hover:text-primary transition-colors">Cancellation Policy</Link>
+                    <Link href="#" className="hover:text-primary transition-colors">{t('footer.privacyPolicy')}</Link>
+                    <Link href="#" className="hover:text-primary transition-colors">{t('footer.terms')}</Link>
+                    <Link href="#" className="hover:text-primary transition-colors">{t('footer.cancellation')}</Link>
                 </div>
-                 <p className="text-center md:text-right">Developed by <a href="#" className="hover:text-primary transition-colors font-medium">EvaDevStudio</a></p>
+                 <p className="text-center md:text-right">{t('footer.developedBy')} <a href="#" className="hover:text-primary transition-colors font-medium">EvaDevStudio</a></p>
             </div>
         </div>
       </div>

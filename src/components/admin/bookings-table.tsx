@@ -12,6 +12,7 @@ import { BookingActions } from './booking-actions';
 import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
 import { Calendar, User, BedDouble } from 'lucide-react';
+import { useI18n } from '@/lib/i18n/i18n-context';
 
 interface BookingsTableProps {
   bookings: Booking[];
@@ -20,6 +21,7 @@ interface BookingsTableProps {
 }
 
 export function BookingsTable({ bookings, rooms, customers }: BookingsTableProps) {
+  const { t } = useI18n();
   const roomMap = new Map(rooms.map(r => [r.id, r.name]));
   const customerMap = new Map(customers.map(c => [c.id, c.name]));
 
@@ -36,7 +38,7 @@ export function BookingsTable({ bookings, rooms, customers }: BookingsTableProps
   if (bookings.length === 0) {
     return (
         <div className="text-center p-8 text-muted-foreground">
-            No bookings found. Add one to get started!
+            {t('bookings.noBookings')}
         </div>
     );
   }
@@ -48,12 +50,12 @@ export function BookingsTable({ bookings, rooms, customers }: BookingsTableProps
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Customer</TableHead>
-              <TableHead>Room</TableHead>
-              <TableHead>Check-In</TableHead>
-              <TableHead>Check-Out</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead className="text-right w-[100px]">Actions</TableHead>
+              <TableHead>{t('bookings.customer')}</TableHead>
+              <TableHead>{t('bookings.room')}</TableHead>
+              <TableHead>{t('bookings.checkIn')}</TableHead>
+              <TableHead>{t('bookings.checkOut')}</TableHead>
+              <TableHead>{t('bookings.status')}</TableHead>
+              <TableHead className="text-right w-[100px]">{t('bookings.actions')}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>

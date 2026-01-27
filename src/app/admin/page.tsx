@@ -27,18 +27,6 @@ export default async function AdminPage() {
       <div className="flex flex-col min-h-screen">
         <Header />
         <main className="flex-1 container mx-auto px-4 py-8">
-          <div className="mb-8 flex justify-between items-center">
-            <div>
-              <h1 className="text-3xl md:text-4xl font-headline font-bold">Admin Dashboard</h1>
-              <p className="text-muted-foreground">Manage your hotel's operations from one central place.</p>
-            </div>
-            {session && (
-              <div className="text-right hidden md:block">
-                <p className="font-medium">Welcome, {session.username}</p>
-                <p className="text-xs text-muted-foreground capitalize">{session.role}</p>
-              </div>
-            )}
-          </div>
           <AdminDashboard 
             initialCategories={categories} 
             initialMenuItems={menuItems}
@@ -47,6 +35,7 @@ export default async function AdminPage() {
             initialCustomers={customers}
             initialWorkers={workers}
             userRole={session?.role || 'receptionist'}
+            username={session?.username}
           />
         </main>
       </div>
