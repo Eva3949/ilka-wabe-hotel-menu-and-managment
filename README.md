@@ -11,7 +11,7 @@ Effcient, mderhotel mnagement with rooms, okings, men iems,customers, nd admin r
 </div>
 
 ---
-
+## Live Demo: https://filagot-hotel.vercel.app/ or https://skycity-hotel.vercel.app/
 ## ✨ Overview
 - End-to-end hotel management: ooms, bookings, custmers, mnu aegories,an items
 - Clean UI compnnt with Radix UI and Tailwind CSSutilities- Strong typing with TypeScript and validation withZod- Drizzle ORM for a robust and maintainable MySQL scema and quere
@@ -134,5 +134,6 @@ Mde wth caref ffient hteloperations.
 
 ## � Contact 
 Email: samueleva3949@gmail.com
+
 
 
